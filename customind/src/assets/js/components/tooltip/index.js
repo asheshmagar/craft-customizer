@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from '@wordpress/element';
 import { Popover, Icon } from '@wordpress/components';
 import PropTypes from 'prop-types';
+import './controls.scss';
 
 const Tooltip = ( { children, position = 'bottom center', width = 150, trigger = 'hover', ...props } ) => {
 	const [ isOpen, setIsOpen ] = useState( false );
@@ -31,7 +32,7 @@ const Tooltip = ( { children, position = 'bottom center', width = 150, trigger =
 			{ isOpen && (
 				<Popover
 					focusOnMount={ false }
-					className="tgwcfb-tooltip"
+					className="customind-tooltip"
 					position={ position }
 					onClose={ () => setIsOpen( false ) }
 					onFocusOutside={ () => setIsOpen( false ) }

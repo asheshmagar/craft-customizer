@@ -5,6 +5,10 @@ import {
 	sliderControl,
 	buttonSetControl,
 	sortableControl,
+	radioImageControl,
+	customControl,
+	colorControl,
+	backgroundControl,
 } from './controls/index';
 import './controls.scss';
 
@@ -14,3 +18,7 @@ toggleControl();
 sliderControl();
 buttonSetControl();
 sortableControl();
+radioImageControl();
+customControl();
+colorControl();
+backgroundControl();

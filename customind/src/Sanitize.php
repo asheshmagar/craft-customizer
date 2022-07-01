@@ -159,23 +159,23 @@ class Sanitize {
 			return array();
 		}
 		$output = array();
-		if ( isset( $background_args['background-color'] ) ) {
-			$output['background-color'] = self::sanitize_alpha_color( $background_args['background-color'], $setting );
+		if ( isset( $input['background-color'] ) ) {
+			$output['background-color'] = self::sanitize_alpha_color( $input['background-color'], $setting );
 		}
-		if ( isset( $background_args['background-image'] ) ) {
-			$output['background-image'] = self::sanitize_image_upload( $background_args['background-image'], $setting );
+		if ( isset( $input['background-image'] ) ) {
+			$output['background-image'] = self::sanitize_image_upload( $input['background-image'], $setting );
 		}
-		if ( isset( $background_args['background-repeat'] ) ) {
-			$output['background-repeat'] = self::sanitize_text_field( $background_args['background-repeat'] );
+		if ( isset( $input['background-repeat'] ) ) {
+			$output['background-repeat'] = self::sanitize_text_field( $input['background-repeat'] );
 		}
-		if ( isset( $background_args['background-position'] ) ) {
-			$output['background-position'] = self::sanitize_text_field( $background_args['background-position'] );
+		if ( isset( $input['background-position'] ) ) {
+			$output['background-position'] = self::sanitize_text_field( $input['background-position'] );
 		}
-		if ( isset( $background_args['background-size'] ) ) {
-			$output['background-size'] = self::sanitize_text_field( $background_args['background-size'] );
+		if ( isset( $input['background-size'] ) ) {
+			$output['background-size'] = self::sanitize_text_field( $input['background-size'] );
 		}
-		if ( isset( $background_args['background-attachment'] ) ) {
-			$output['background-attachment'] = self::sanitize_text_field( $background_args['background-attachment'] );
+		if ( isset( $input['background-attachment'] ) ) {
+			$output['background-attachment'] = self::sanitize_text_field( $input['background-attachment'] );
 		}
 		return $output;
 	}

@@ -136,6 +136,93 @@ class CustomindOptions extends BaseOption {
 					'four',
 				),
 			),
+			array(
+				'name'      => 'customind_radio_image',
+				'default'   => 'right_sidebar',
+				'type'      => 'control',
+				'control'   => 'customind-radio-image',
+				'label'     => 'Radio Image',
+				'section'   => 'customind_section',
+				'choices'   => array(
+					'right_sidebar'                => array(
+						'label' => 'Right sidebar',
+						'url'   => get_template_directory_uri() . '/customizer/left-sidebar.png',
+					),
+					'left_sidebar'                 => array(
+						'label' => 'Left sidebar',
+						'url'   => get_template_directory_uri() . '/customizer/left-sidebar.png',
+					),
+					'no_sidebar_full_width'        => array(
+						'label' => 'No sidebar full width',
+						'url'   => get_template_directory_uri() . '/customizer/left-sidebar.png',
+					),
+					'no_sidebar_content_centered'  => array(
+						'label' => 'No sidebar content centered',
+						'url'   => get_template_directory_uri() . '/customizer/left-sidebar.png',
+					),
+					'no_sidebar_content_stretched' => array(
+						'label' => 'No sidebar content stretched',
+						'url'   => get_template_directory_uri() . '/customizer/left-sidebar.png',
+					),
+				),
+				'priority'  => 30,
+				'image_col' => 3,
+			),
+			array(
+				'name'     => 'customind_custom',
+				'default'  => '',
+				'type'     => 'control',
+				'control'  => 'customind-custom',
+				'label'    => 'Custom',
+				'section'  => 'customind_section',
+				'priority' => 30,
+				'info'     => '<h2> This is custom info </h2>',
+				'links'    => array(
+					array(
+						'url'  => 'https://themegrill.com/themes',
+						'text' => esc_html__( 'Visit ThemeGrill', 'colormag' ),
+					),
+					array(
+						'url'  => 'https://themegrill.com/themes',
+						'text' => esc_html__( 'Visit ThemeGrill', 'colormag' ),
+					),
+				),
+			),
+			array(
+				'name'     => 'customind_color',
+				'default'  => '#289dcc',
+				'type'     => 'control',
+				'control'  => 'customind-color',
+				'label'    => esc_html__( 'Customind color', 'customind' ),
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
+			array(
+				'name'     => 'customind_color_2',
+				'default'  => '',
+				'type'     => 'control',
+				'control'  => 'customind-color',
+				'label'    => esc_html__( 'Customind color 2', 'customind' ),
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
+			array(
+				'name'        => 'customind_background',
+				'default'     => array(
+					'background-color'      => '#ffffff',
+					'background-image'      => '',
+					'background-position'   => 'center center',
+					'background-size'       => 'auto',
+					'background-attachment' => 'scroll',
+					'background-repeat'     => 'repeat',
+				),
+				'type'        => 'control',
+				'control'     => 'customind-background',
+				'section'     => 'customind_section',
+				'label'       => 'Background',
+				'description' => 'Background description',
+				'priority'    => 30,
+			),
 		);
 		return array_merge( $options, $configs );
 	}

@@ -4,3 +4,7 @@ export { default as toggleControl } from './toggle';
 export { default as sliderControl } from './slider';
 export { default as buttonSetControl } from './button-set';
 export { default as sortableControl } from './sortable';
+export { default as radioImageControl } from './radio-image';
+export { default as customControl } from './custom';
+export { default as colorControl } from './color';
+export { default as backgroundControl } from './background';

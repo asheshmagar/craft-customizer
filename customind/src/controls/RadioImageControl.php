@@ -24,6 +24,7 @@ class RadioImageControl extends BaseControl {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['image_col'] = $this->image_col;
+		$this->json['col']     = $this->image_col;
+		$this->json['choices'] = $this->choices;
 	}
 }

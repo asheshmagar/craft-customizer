@@ -1,0 +1,12 @@
+{
+  "name": "tg/customind",
+  "autoload": {
+    "psr-4": {
+      "Customind\\": [
+        "src",
+        "src/controls/"
+      ]
+    }
+  },
+  "require": {}
+}

@@ -1,0 +1,35 @@
+import { useState, memo } from '@wordpress/element';
+import { RangeControl } from '@wordpress/components';
+
+const Slider = ( props ) => {
+	const [ value, setValue ] = useState( props.setting.get() );
+	const {
+		label,
+		input_attrs: inputAttrs,
+	} = props.params;
+
+	const attrs = {
+		min: 0, max: 500, step: 1,
+		...( inputAttrs || {} ),
+	};
+	return (
+		<div className="customize-control customind-slider-control" >
+			{ label && (
+				<div className="customize-control-title-wrap">
+					<span className="customize-control-title">{ label }</span>
+				</div>
+			) }
+			<RangeControl
+				value={ value }
+				onChange={ val => {
+					setValue( val );
+					props.setting.set( val );
+				} }
+				resetFallbackValue={ props.params.default || '' }
+				{ ...attrs }
+			/>
+		</div>
+	);
+};
+
+export default memo( Slider );

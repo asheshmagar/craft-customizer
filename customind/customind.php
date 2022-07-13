@@ -1,13 +1,7 @@
 <?php
 
-use Customind\Framework;
-
-define( 'CUSTOMIND_FILE', __FILE__ );
+use Customind\Customind;
 
 require __DIR__ . '/vendor/autoload.php';
 
-function Customind() {
-	return Framework::instance();
-}
-
-Customind();
+Customind::get_instance();

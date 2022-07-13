@@ -1,5 +1,5 @@
 <?php
-namespace Customind;
+namespace Customind\Type;
 
 use WP_Customize_Section;
 

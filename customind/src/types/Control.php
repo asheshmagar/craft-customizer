@@ -1,8 +1,8 @@
 <?php
 
-namespace Customind;
+namespace Customind\Type;
 
-class CustomindControl {
+class Control {
 
 	public static $controls;
 

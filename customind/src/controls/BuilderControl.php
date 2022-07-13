@@ -1,22 +1,20 @@
 <?php
 namespace Customind\Control;
 
-class FontawesomeControl extends BaseControl {
+class BuilderControl extends BaseControl {
 
 	/**
 	 * Control's type.
 	 *
 	 * @var string
 	 */
-	public $type = 'customind-fontawesome';
+	public $type = 'customind-builder';
 
-	/**
-	 * Refresh the parameters passed to the JavaScript via JSON.
-	 *
-	 * @return void
-	 */
+	public $areas = array();
+
 	public function to_json() {
 		parent::to_json();
+		$this->json['areas']   = $this->areas;
 		$this->json['choices'] = $this->choices;
 	}
 }

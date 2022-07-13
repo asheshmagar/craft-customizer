@@ -1,5 +1,5 @@
 <?php
-namespace Customind;
+namespace Customind\Control;
 
 class NavigateControl extends BaseControl {
 

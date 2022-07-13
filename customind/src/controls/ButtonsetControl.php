@@ -1,5 +1,5 @@
 <?php
-namespace Customind;
+namespace Customind\Control;
 
 class ButtonsetControl extends BaseControl {
 
@@ -10,6 +10,10 @@ class ButtonsetControl extends BaseControl {
 	 */
 	public $type = 'customind-buttonset';
 
+	public $multiple = false;
+
+	public $responsive = false;
+
 	/**
 	 * Refresh the parameters passed to the JavaScript via JSON.
 	 *
@@ -17,6 +21,8 @@ class ButtonsetControl extends BaseControl {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['choices'] = $this->choices;
+		$this->json['choices']    = $this->choices;
+		$this->json['multiple']   = $this->multiple;
+		$this->json['responsive'] = $this->responsive;
 	}
 }

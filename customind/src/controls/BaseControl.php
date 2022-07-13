@@ -3,7 +3,7 @@
  * Customind base control class.
  */
 
-namespace Customind;
+namespace Customind\Control;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;

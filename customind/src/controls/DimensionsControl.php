@@ -1,7 +1,7 @@
 <?php
-namespace Customind;
+namespace Customind\Control;
 
-class DimensionControl extends BaseControl {
+class DimensionsControl extends BaseControl {
 
 	/**
 	 * Control's type.
@@ -9,6 +9,10 @@ class DimensionControl extends BaseControl {
 	 * @var string
 	 */
 	public $type = 'customind-dimensions';
+
+	public $responsive = false;
+
+	public $units = array();
 
 	/**
 	 * Refresh the parameters passed to the JavaScript via JSON.
@@ -18,5 +22,7 @@ class DimensionControl extends BaseControl {
 	public function to_json() {
 		parent::to_json();
 		$this->json['choices'] = $this->choices;
+		$this->json['responsive'] = $this->responsive;
+		$this->json['units'] = $this->units;
 	}
 }

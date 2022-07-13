@@ -1,5 +1,5 @@
 <?php
-namespace Customind;
+namespace Customind\Control;
 
 class DropdownCategoriesControl extends BaseControl {
 

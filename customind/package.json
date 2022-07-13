@@ -10,6 +10,7 @@
     "@babel/preset-react": "^7.17.12",
     "@wordpress/block-editor": "^9.4.0",
     "@wordpress/components": "^19.13.0",
+    "@wordpress/compose": "^5.10.0",
     "@wordpress/dependency-extraction-webpack-plugin": "^3.6.0",
     "@wordpress/element": "^4.9.0",
     "@wordpress/eslint-plugin": "^12.5.0",
@@ -34,7 +35,11 @@
     "eslint-plugin-wordpress": "^0.1.0",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
+    "fs": "^0.0.1-security",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.1.0",
     "jquery": "^3.6.0",
+    "less-loader": "^11.0.0",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.6.0",
     "prettier": "^2.6.2",
@@ -43,6 +48,7 @@
     "react-dom": "17.0.1",
     "react-router-dom": "^5.2.0",
     "remove-files-webpack-plugin": "^1.5.0",
+    "request": "^2.88.2",
     "sass": "^1.52.3",
     "sass-loader": "^13.0.0",
     "style-loader": "^3.3.1",
@@ -59,9 +65,9 @@
   },
   "dependencies": {
     "buffer": "^6.0.3",
+    "rc-select": "^14.1.8",
     "react-html-parser": "^2.0.2",
     "react-sortablejs": "^6.1.4",
-    "sortablejs": "^1.15.0",
-    "uuid": "^8.3.2"
+    "sortablejs": "^1.15.0"
   }
 }

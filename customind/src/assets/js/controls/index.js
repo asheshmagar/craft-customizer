@@ -8,3 +8,8 @@ export { default as radioImageControl } from './radio-image';
 export { default as customControl } from './custom';
 export { default as colorControl } from './color';
 export { default as backgroundControl } from './background';
+export { default as typographyControl } from './typography';
+export { default as dimensionsControl } from './dimensions';
+export { default as navigateControl } from './navigate';
+export { default as dropdownCategoriesControl } from './dropdown-categories';
+export { default as builderControl } from './builder';

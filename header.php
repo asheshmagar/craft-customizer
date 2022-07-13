@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -28,3 +25,6 @@ if ( is_singular() ) {
 	</div>
 </div>
 <hr />
+	<?php print '<pre>';
+		print_r( get_option( 'theme_mods_customind' ) );
+		print '</pre>'; ?>

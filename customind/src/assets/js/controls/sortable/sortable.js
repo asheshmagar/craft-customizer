@@ -6,14 +6,14 @@ import { Sortable } from 'sortablejs';
 export default memo( ( props ) => {
 	const sortableRef = useRef();
 	const unsortableRef = useRef();
-	const [ value ] = useState( props.setting.get() );
+	const [ value ] = useState( props.control.setting.get() );
 
 	const {
 		label,
 		description,
 		choices,
 		unsortable,
-	} = props.params;
+	} = props.control.params;
 
 	const update = useCallback( () => {
 		const sortableValue = [];
@@ -33,7 +33,7 @@ export default memo( ( props ) => {
 			}
 		}
 		const newValue = unsortableValue.concat( sortableValue );
-		props.setting.set( newValue );
+		props.control.setting.set( newValue );
 	}, [ unsortableRef.current, sortableRef.current ] );
 
 	useEffect( () => {

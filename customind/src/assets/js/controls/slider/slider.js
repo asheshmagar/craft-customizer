@@ -2,11 +2,11 @@ import { useState, memo } from '@wordpress/element';
 import { RangeControl } from '@wordpress/components';
 
 const Slider = ( props ) => {
-	const [ value, setValue ] = useState( props.setting.get() );
+	const [ value, setValue ] = useState( props.control.setting.get() );
 	const {
 		label,
 		input_attrs: inputAttrs,
-	} = props.params;
+	} = props.control.params;
 
 	const attrs = {
 		min: 0, max: 500, step: 1,
@@ -23,9 +23,9 @@ const Slider = ( props ) => {
 				value={ value }
 				onChange={ val => {
 					setValue( val );
-					props.setting.set( val );
+					props.control.setting.set( val );
 				} }
-				resetFallbackValue={ props.params.default || '' }
+				resetFallbackValue={ props.control.params.default || '' }
 				{ ...attrs }
 			/>
 		</div>

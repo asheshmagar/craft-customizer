@@ -2,18 +2,18 @@ import { memo, useState } from '@wordpress/element';
 import { Tooltip } from '../../components';
 
 const RadioImage = ( props ) => {
-	const [ value, setValue ] = useState( props.setting.get() || '' );
+	const [ value, setValue ] = useState( props.control.setting.get() || '' );
 
 	const {
 		label,
 		description,
 		choices,
 		col = 2,
-	} = props.params;
+	} = props.control.params;
 
 	const update = ( val ) => {
 		setValue( val );
-		props.setting.set( val );
+		props.control.setting.set( val );
 	};
 
 	return (

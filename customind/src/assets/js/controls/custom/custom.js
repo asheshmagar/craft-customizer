@@ -7,7 +7,7 @@ const Custom = ( props ) => {
 		label,
 		info,
 		links,
-	} = props.params;
+	} = props.control.params;
 
 	return (
 		<div className="customize-control customize-control-customind-custom">

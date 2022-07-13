@@ -8,19 +8,19 @@ const Editor = ( props ) => {
 	const {
 		label,
 		description,
-	} = props.params;
+	} = props.control.params;
 
 	useEffect( () => {
-		setValue( props.setting.get() );
+		setValue( props.control.setting.get() );
 		const initialize = () => {
 			wp.editor.initialize( ( props?.id || 'customind_editor' ), {
 				quicktags: true,
+				mediaButtons: true,
 				tinymce: {
 					wpautop: true,
 					toolbar1: 'bold italic bullist numlist link',
 					toolbar2: '',
 					height: 150,
-					mediaButtons: true,
 					setup: editor => {
 						editor.on( 'Paste Change input Undo Redo', debounce( () => {
 							const content = editor.getContent();
@@ -47,7 +47,7 @@ const Editor = ( props ) => {
 
 	const update = ( val ) => {
 		setValue( val );
-		props.setting.set( val );
+		props.control.setting.set( val );
 	};
 
 	return (

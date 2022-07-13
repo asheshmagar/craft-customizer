@@ -5,7 +5,7 @@ const Title = ( props ) => {
 		label,
 		description,
 		link,
-	} = props.params;
+	} = props.control.params;
 	return (
 		<div className="customind-control customind-title-control">
 			{ label && (

@@ -3,13 +3,13 @@ import { ButtonGroup, Button } from '@wordpress/components';
 import { Tooltip } from '../../components';
 
 const ButtonSet = ( props ) => {
-	const [ value, setValue ] = useState( props.setting.get() );
+	const [ value, setValue ] = useState( props.control.setting.get() );
 
 	const {
 		label,
 		description,
 		choices = {},
-	} = props.params;
+	} = props.control.params;
 
 	return (
 		<div className="customind-control customind-editor-control">
@@ -30,7 +30,7 @@ const ButtonSet = ( props ) => {
 							key={ key }
 							onClick={ () => {
 								setValue( key );
-								props.setting.set( key );
+								props.control.setting.set( key );
 							} }
 							variant={ key === value ? 'primary' : 'secondary' }
 							className={ key }

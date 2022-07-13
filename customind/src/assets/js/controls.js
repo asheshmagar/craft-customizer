@@ -9,6 +9,11 @@ import {
 	customControl,
 	colorControl,
 	backgroundControl,
+	typographyControl,
+	dimensionsControl,
+	navigateControl,
+	dropdownCategoriesControl,
+	builderControl,
 } from './controls/index';
 import './controls.scss';
 
@@ -22,3 +27,8 @@ radioImageControl();
 customControl();
 colorControl();
 backgroundControl();
+typographyControl();
+dimensionsControl();
+navigateControl();
+dropdownCategoriesControl();
+builderControl();

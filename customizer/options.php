@@ -223,6 +223,242 @@ class CustomindOptions extends BaseOption {
 				'description' => 'Background description',
 				'priority'    => 30,
 			),
+			array(
+				'name'                 => 'customind_typography',
+				'default'              => array(
+					'font-family'    => 'default',
+					'font-weight'    => 'regular',
+					'subsets'        => array( 'latin' ),
+					'font-size'      => array(
+						'desktop' => array(
+							'value' => 15,
+							'unit'  => 'px',
+						),
+						'tablet'  => array(),
+						'mobile'  => array(),
+					),
+					'line-height'    => array(
+						'desktop' => array(
+							'value' => 1.6,
+							'unit'  => '',
+						),
+						'tablet'  => array(),
+						'mobile'  => array(),
+					),
+					'letter-spacing' => array(
+						'desktop' => array(),
+						'tablet'  => array(),
+						'mobile'  => array(),
+					),
+				),
+				'units'                => array(
+					'font-size'       => array( 'px', 'em', 'rem' ),
+					'line-height'     => array( 'px', 'em', 'rem' ),
+					'letter-spacing ' => array( '-', 'px', 'em', 'rem' ),
+				),
+				'input_attrs'          => array(
+					'desktop' => array(
+						'font-size'      => array(
+							'step' => 1,
+							'min'  => 10,
+							'max'  => 36,
+						),
+						'line-height'    => array(
+							'step' => 0.1,
+							'min'  => 0,
+							'max'  => 3,
+						),
+						'letter-spacing' => array(
+							'step' => 0.1,
+							'min'  => 0,
+							'max'  => 4,
+						),
+					),
+					'tablet'  => array(
+						'font-size'      => array(
+							'step' => 1,
+							'min'  => 10,
+							'max'  => 36,
+						),
+						'line-height'    => array(
+							'step' => 0.1,
+							'min'  => 0,
+							'max'  => 3,
+						),
+						'letter-spacing' => array(
+							'step' => 0.1,
+							'min'  => 0,
+							'max'  => 4,
+						),
+					),
+					'mobile'  => array(
+						'font-size'      => array(
+							'step' => 1,
+							'min'  => 10,
+							'max'  => 36,
+						),
+						'line-height'    => array(
+							'step' => 0.1,
+							'min'  => 0,
+							'max'  => 3,
+						),
+						'letter-spacing' => array(
+							'step' => 0.1,
+							'min'  => 0,
+							'max'  => 4,
+						),
+					),
+				),
+				'type'                 => 'control',
+				'control'              => 'customind-typography',
+				'section'              => 'customind_section',
+				'priority'             => 30,
+				'label'                => esc_html__( 'Typography', 'customind' ),
+				'description'          => 'Typography description',
+				'font_size_units'      => array( 'px', 'rem', 'em' ),
+				'letter_spacing_units' => array( 'px', 'rem', 'em' ),
+				'line_height_units'    => array( 'rem', 'em' ),
+			),
+			array(
+				'name'       => 'customind_responsive_dimensions',
+				'type'       => 'control',
+				'default'    => array(
+					'desktop' => array(
+						'top'    => '5',
+						'right'  => '10',
+						'bottom' => '20',
+						'left'   => '25',
+						'unit'   => 'px',
+					),
+				),
+				'control'    => 'customind-dimensions',
+				'label'      => esc_html__( 'Dimensions', 'customind' ),
+				'section'    => 'customind_section',
+				'priority'   => 30,
+				'units'      => array( 'px', 'rem', '' ),
+				'responsive' => true,
+			),
+			array(
+				'name'     => 'customind_dimensions',
+				'type'     => 'control',
+				'default'  => array(
+					'top'    => '5',
+					'right'  => '10',
+					'bottom' => '20',
+					'left'   => '25',
+					'unit'   => 'px',
+				),
+				'control'  => 'customind-dimensions',
+				'label'    => esc_html__( 'Dimensions', 'customind' ),
+				'section'  => 'customind_header_builder_section_hidden',
+				'priority' => 30,
+				'units'    => array( 'px', 'rem', '' ),
+			),
+
+			array(
+				'name'          => 'customind_navigate',
+				'type'          => 'control',
+				'control'       => 'customind-navigate',
+				'label'         => esc_html__( 'Navigate', 'customind' ),
+				'section'       => 'customind_header_builder_section',
+				'navigate_info' => array(
+					'target_id'    => 'customind_header_builder_section_hidden',
+					'target_label' => esc_html__( 'Dimensions', 'customind' ),
+				),
+				'priority'      => 30,
+				'context'       => array(
+					array(
+						'setting' => '__current_tab',
+						'value'   => 'general',
+					),
+				),
+			),
+			array(
+				'name'     => 'customind_dropdown_categories',
+				'type'     => 'control',
+				'control'  => 'customind-dropdown-categories',
+				'label'    => esc_html__( 'Dropdown categories', 'customind' ),
+				'section'  => 'customind_header_builder_section',
+				'priority' => 30,
+				'context'  => array(
+					array(
+						'setting' => '__current_tab',
+						'value'   => 'general',
+					),
+				),
+			),
+			array(
+				'name'     => 'customind_builder_control',
+				'type'     => 'control',
+				'default'  => array(
+					'top'    => array(
+						'top_left'   => array( 'logo' ),
+						'top_center' => array(),
+						'top_right'  => array(),
+					),
+					'main'   => array(
+						'main_left'   => array(),
+						'main_center' => array(),
+						'main_right'  => array(),
+					),
+					'bottom' => array(
+						'bottom_left'   => array(),
+						'bottom_center' => array(),
+						'bottom_right'  => array(),
+					),
+				),
+				'control'  => 'customind-builder',
+				'label'    => esc_html__( 'Builder', 'customind' ),
+				'section'  => 'customind_header_builder',
+				'priority' => 30,
+				'choices'  => array(
+					'logo'         => array(
+						'name'    => esc_html__( 'Logo', 'customind' ),
+						'section' => 'title_tagline',
+					),
+					'navigation'   => array(
+						'name'    => esc_html__( 'Primary Navigation', 'customind' ),
+						'section' => 'customind_primary_navigation',
+					),
+					'navigation-2' => array(
+						'name'    => esc_html__( 'Secondary Navigation', 'customind' ),
+						'section' => 'customind_secondary_navigation',
+					),
+					'search'       => array(
+						'name'    => esc_html__( 'Search', 'customind' ),
+						'section' => 'customind_header_search',
+					),
+					'button'       => array(
+						'name'    => esc_html__( 'Button', 'customind' ),
+						'section' => 'customind_header_button',
+					),
+					'social'       => array(
+						'name'    => esc_html__( 'Social', 'customind' ),
+						'section' => 'customind_header_social',
+					),
+					'html'         => array(
+						'name'    => esc_html__( 'HTML', 'customind' ),
+						'section' => 'customind_header_html',
+					),
+				),
+				'areas'    => array(
+					'top'    => array(
+						'top_left'   => 'Top Left',
+						'top_center' => 'Top Center',
+						'top_right'  => 'Top Right',
+					),
+					'main'   => array(
+						'main_left'   => 'Main Left',
+						'main_center' => 'Main center',
+						'main_right'  => 'Main Right',
+					),
+					'bottom' => array(
+						'bottom_left'   => 'Bottom Left',
+						'bottom_center' => 'Bottom Center',
+						'bottom_right'  => 'Bottom Right',
+					),
+				),
+			),
 		);
 		return array_merge( $options, $configs );
 	}
@@ -238,9 +474,63 @@ class CustomindPanels extends BaseOption {
 				'priority' => 10,
 			),
 			array(
+				'name'     => 'customind_builder_section',
+				'type'     => 'section',
+				'title'    => esc_html__( 'Builder', 'customind' ),
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_header',
+				'type'     => 'customind-builder-panel',
+				'title'    => esc_html__( 'Builder', 'customind' ),
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_header_builder',
+				'type'     => 'customind-builder-section',
+				'panel'    => 'customind_header',
+				'title'    => esc_html__( 'Builder', 'customind' ),
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_header_builder_section',
+				'type'     => 'customind-builder-section',
+				'panel'    => 'customind_header',
+				'title'    => esc_html__( 'Inner', 'customind' ),
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_header_builder_section_hidden',
+				'type'     => 'section',
+				'panel'    => 'customind_header',
+				'title'    => esc_html__( 'Inner', 'customind' ),
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_builder_section_inner_2',
+				'type'     => 'section',
+				'section'  => 'customind_builder_section_inner_1',
+				'title'    => esc_html__( 'Inner', 'customind' ),
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_inner_section',
+				'type'     => 'section',
+				'panel'    => 'customind_panel',
+				'title'    => esc_html__( 'Builder', 'customind' ),
+				'priority' => 10,
+			),
+			array(
 				'name'     => 'customind_section',
 				'type'     => 'section',
 				'title'    => esc_html__( 'Section', 'customind' ),
+				'panel'    => 'customind_panel',
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_section_2',
+				'type'     => 'section',
+				'title'    => esc_html__( 'Section 2', 'customind' ),
 				'panel'    => 'customind_panel',
 				'priority' => 10,
 			),

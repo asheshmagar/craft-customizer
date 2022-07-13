@@ -3,8 +3,10 @@
 namespace Customind;
 
 use WP_Customize_Manager;
+use Customind\Type\Panel;
+use Customind\Type\Control;
 
-class Framework {
+class Customind {
 
 	private static $instance = null;
 
@@ -45,79 +47,82 @@ class Framework {
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_image_upload' ),
 		),
 		'customind-radio-image'         => array(
-			'callback'          => 'Customind\RadioImageControl',
+			'callback'          => 'Customind\Control\RadioImageControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_radio_select' ),
 		),
 		'customind-heading'             => array(
-			'callback'          => 'Customind\HeadingControl',
+			'callback'          => 'Customind\Control\HeadingControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_false_values' ),
 		),
 		'customind-navigate'            => array(
-			'callback'          => 'Customind\NavigateControl',
+			'callback'          => 'Customind\Control\NavigateControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_false_values' ),
 		),
 		'customind-editor'              => array(
-			'callback'          => 'Customind\EditorControl',
+			'callback'          => 'Customind\Control\EditorControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_html' ),
 		),
 		'customind-color'               => array(
-			'callback'          => 'Customind\ColorControl',
+			'callback'          => 'Customind\Control\ColorControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_alpha_color' ),
 		),
 		'customind-buttonset'           => array(
-			'callback'          => 'Customind\ButtonsetControl',
+			'callback'          => 'Customind\Control\ButtonsetControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_radio_select' ),
 		),
 		'customind-toggle'              => array(
-			'callback'          => 'Customind\ToggleControl',
+			'callback'          => 'Customind\Control\ToggleControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_checkbox' ),
 		),
 		'customind-slider'              => array(
-			'callback'          => 'Customind\SliderControl',
+			'callback'          => 'Customind\Control\SliderControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_number' ),
 		),
 		'customind-divider'             => array(
-			'callback'          => 'Customind\DividerControl',
+			'callback'          => 'Customind\Control\DividerControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_false_values' ),
 		),
 		'customind-dropdown-categories' => array(
-			'callback'          => 'Customind\DropdownCategoriesControl',
+			'callback'          => 'Customind\Control\DropdownCategoriesControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_dropdown_categories' ),
 		),
 		'customind-custom'              => array(
-			'callback'          => 'Customind\CustomControl',
+			'callback'          => 'Customind\Control\CustomControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_false_values' ),
 		),
 		'customind-background'          => array(
-			'callback'          => 'Customind\BackgroundControl',
+			'callback'          => 'Customind\Control\BackgroundControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_background' ),
 		),
 		'customind-typography'          => array(
-			'callback'          => 'Customind\TypographyControl',
+			'callback'          => 'Customind\Control\TypographyControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_typography' ),
 		),
 		'customind-hidden'              => array(
-			'callback' => 'Customind\HiddenControl',
+			'callback' => 'Customind\Control\HiddenControl',
 		),
 		'customind-sortable'            => array(
-			'callback'          => 'Customind\SortableControl',
+			'callback'          => 'Customind\Control\SortableControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_sortable' ),
 		),
 		'customind-group'               => array(
-			'callback' => 'Customind\GroupControl',
+			'callback' => 'Customind\Control\GroupControl',
 		),
 		'customind-title'               => array(
-			'callback' => 'Customind\TitleControl',
+			'callback' => 'Customind\Control\TitleControl',
 		),
 		'customind-dimensions'          => array(
-			'callback' => 'Customind\DimensionControl',
+			'callback' => 'Customind\Control\DimensionsControl',
 		),
 		'customind-upgrade'             => array(
-			'callback' => 'Customind\UpgradeControl',
+			'callback' => 'Customind\Control\UpgradeControl',
 		),
 		'customind-fontawesome'         => array(
-			'callback'          => 'Customind\FontawesomeControl',
+			'callback'          => 'Customind\Control\FontawesomeControl',
 			'sanitize_callback' => array( 'Customind\Sanitize', 'sanitize_radio_select' ),
+		),
+		'customind-builder'             => array(
+			'callback' => 'Customind\Control\BuilderControl',
 		),
 	);
 
@@ -125,7 +130,7 @@ class Framework {
 
 	public $group_configs = array();
 
-	public static function instance() {
+	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
@@ -138,17 +143,37 @@ class Framework {
 	}
 
 	public function enqueue_scripts() {
-		$asset_file = __DIR__ . '/assets/build/controls.asset.php';
-		$asset      = array(
+		$controls_asset_file   = __DIR__ . '/assets/build/controls.asset.php';
+		$customizer_asset_file = __DIR__ . '/assets/build/customizer.asset.php';
+		$controls_asset        = array(
 			'dependencies' => array(),
 			'version'      => time(),
 		);
-		if ( file_exists( $asset_file ) ) {
-			$asset = require $asset_file;
+		$customizer_asset      = array(
+			'dependencies' => array(),
+			'version'      => time(),
+		);
+
+		if ( file_exists( $controls_asset_file ) ) {
+			$controls_asset = require $controls_asset_file;
 		}
+
+		if ( file_exists( $customizer_asset_file ) ) {
+			$customizer_asset = require $customizer_asset_file;
+		}
+
+		wp_enqueue_script( 'customind-customizer', $this->get_assets_url() . '/assets/build/customizer.js', $customizer_asset['dependencies'], $customizer_asset['version'], true );
+
 		wp_enqueue_editor();
-		wp_enqueue_script( 'customind-controls', $this->get_assets_url() . '/assets/build/controls.js', $asset['dependencies'], $asset['version'], true );
-		wp_enqueue_style( 'customind-controls', $this->get_assets_url() . '/assets/build/controls.css', array( 'wp-components' ), $asset['version'] );
+		wp_enqueue_script( 'customind-controls', $this->get_assets_url() . '/assets/build/controls.js', $controls_asset['dependencies'], $controls_asset['version'], true );
+		wp_enqueue_style( 'customind-controls', $this->get_assets_url() . '/assets/build/controls.css', array( 'wp-components' ), $controls_asset['version'] );
+		//      wp_localize_script(
+		//          'customind-controls',
+		//          '_CUSTOMIND_',
+		//          array(
+		//              'contexts' => $this->get_contexts(),
+		//          )
+		//      );
 	}
 
 	public function get_assets_url() {
@@ -177,10 +202,10 @@ class Framework {
 	 * @return void
 	 */
 	private function register( $wp_customize ) {
-		$wp_customize->register_panel_type( 'Customind\Panel' );
-		$wp_customize->register_section_type( 'Customind\Section' );
-		$wp_customize->register_section_type( 'Customind\SeparatorSection' );
-		$wp_customize->register_section_type( 'Customind\UpsellSection' );
+		$wp_customize->register_panel_type( 'Customind\Type\Panel' );
+		$wp_customize->register_section_type( 'Customind\Type\Section' );
+		$wp_customize->register_section_type( 'Customind\Type\SeparatorSection' );
+		$wp_customize->register_section_type( 'Customind\Type\UpsellSection' );
 	}
 
 	private function override_defaults( $wp_customize ) {
@@ -199,7 +224,7 @@ class Framework {
 
 	private function add_controls() {
 		foreach ( $this->controls as $key => $value ) {
-			CustomindControl::add_control( $key, $value );
+			Control::add_control( $key, $value );
 		}
 	}
 
@@ -241,13 +266,17 @@ class Framework {
 
 			switch ( $config['type'] ) {
 				case 'panel':
-					// Remove `panel` type from configuration for registering it in different way.
-					unset( $config['type'] );
+				case 'customind-builder-panel':
+					if ( 'panel' === $config['type'] ) {
+						unset( $config['type'] ); // Remove `panel` type from configuration for registering it in different way.
+					}
 					$this->register_panel( $config, $wp_customize );
 					break;
 				case 'section':
-					// Remove `section` type from configuration for registering it in different way.
-					unset( $config['type'] );
+				case 'customind-builder-section':
+					if ( 'section' === $config['type'] ) {
+						unset( $config['type'] ); // Remove `section` type from configuration for registering it in different way.
+					}
 					$this->register_section( $config, $wp_customize );
 					break;
 				case 'sub-control':
@@ -275,7 +304,7 @@ class Framework {
 	}
 
 	public function register_section( $config, $wp_customize ) {
-		$section_callback = isset( $config['section_callback'] ) ? $config['section_callback'] : 'Customind\Section';
+		$section_callback = isset( $config['section_callback'] ) ? $config['section_callback'] : 'Customind\Type\Section';
 		$wp_customize->add_section(
 			new $section_callback(
 				$wp_customize,
@@ -306,7 +335,7 @@ class Framework {
 		}
 
 		// For adding settings.
-		$sanitize_callback = isset( $config['sanitize_callback'] ) ? $config['sanitize_callback'] : CustomindControl::get_sanitize_callback( $config['control'] );
+		$sanitize_callback = isset( $config['sanitize_callback'] ) ? $config['sanitize_callback'] : Control::get_sanitize_callback( $config['control'] );
 		$transport         = isset( $config['transport'] ) ? $config['transport'] : 'refresh';
 		$customize_config  = array(
 			'name'              => $sub_control_name,
@@ -328,7 +357,7 @@ class Framework {
 			)
 		);
 
-		$control_type = CustomindControl::get_control_instance( $customize_config['control'] );
+		$control_type = Control::get_control_instance( $customize_config['control'] );
 
 		if ( false !== $control_type ) {
 			$wp_customize->add_control(
@@ -353,7 +382,7 @@ class Framework {
 	 * @return void
 	 */
 	public function register_setting_control( $config, $wp_customize ) {
-		$sanitize_callback = isset( $config['sanitize_callback'] ) ? $config['sanitize_callback'] : CustomindControl::get_sanitize_callback( $config['control'] );
+		$sanitize_callback = isset( $config['sanitize_callback'] ) ? $config['sanitize_callback'] : Control::get_sanitize_callback( $config['control'] );
 		$transport         = isset( $config['transport'] ) ? $config['transport'] : 'refresh';
 		if ( 'customind-group' === $config['control'] ) {
 			$sanitize_callback = false;
@@ -367,7 +396,7 @@ class Framework {
 				'sanitize_callback' => $sanitize_callback,
 			)
 		);
-		$control_type   = CustomindControl::get_control_instance( $config['control'] );
+		$control_type   = Control::get_control_instance( $config['control'] );
 		$config['type'] = $config['control'];
 
 		if ( false !== $control_type ) {

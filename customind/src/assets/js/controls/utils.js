@@ -72,6 +72,7 @@ export const defineControls = ( type, Component ) => {
 		embed() {
 			const control = this,
 				section = control.section();
+
 			wp.customize.section( section, sec => {
 				if ( sec.expanded() || wp.customize.settings.autofocus.control === control.id ) {
 					control.actuallyEmbed();
@@ -97,9 +98,17 @@ export const defineControls = ( type, Component ) => {
 		renderContent() {
 			const control = this;
 			render(
-				<Component { ...control } />,
+				<Component control={ control } customizer={ wp.customize } />,
 				control.container[ 0 ]
 			);
 		},
 	} ) );
+};
+
+export const getObjectValues = ( object ) => {
+	if ( object && 'object' === typeof object ) {
+		return Object.values( object ).map( getObjectValues ).flat();
+	}
+
+	return [ object ];
 };

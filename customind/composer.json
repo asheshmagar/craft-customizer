@@ -2,10 +2,9 @@
   "name": "tg/customind",
   "autoload": {
     "psr-4": {
-      "Customind\\": [
-        "src",
-        "src/controls/"
-      ]
+      "Customind\\": "src",
+      "Customind\\Control\\": "src/controls",
+      "Customind\\Type\\": "src/types"
     }
   },
   "require": {}

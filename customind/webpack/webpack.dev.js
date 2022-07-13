@@ -7,6 +7,7 @@ const MiniCSSExtractPlugin = require( 'mini-css-extract-plugin' );
 module.exports = () => ( {
 	entry: {
 		controls: resolve( process.cwd(), 'src/assets/js', 'controls.js' ),
+		customizer: resolve( process.cwd(), 'src/assets/js', 'customizer.js' ),
 	},
 	output: {
 		filename: '[name].js',
@@ -32,6 +33,20 @@ module.exports = () => ( {
 					},
 					{
 						loader: 'css-loader',
+					},
+				],
+			},
+			{
+				test: /\.less$/i,
+				use: [
+					{
+						loader: MiniCSSExtractPlugin.loader,
+					},
+					{
+						loader: 'css-loader',
+					},
+					{
+						loader: 'less-loader',
 					},
 				],
 			},

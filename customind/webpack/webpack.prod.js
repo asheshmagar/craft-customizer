@@ -3,11 +3,11 @@ const WebpackBar = require( 'webpackbar' );
 const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 const MiniCSSExtractPlugin = require( 'mini-css-extract-plugin' );
 const { dirname, basename, resolve } = require( 'path' );
-const CopyPlugin = require( 'copy-webpack-plugin' );
 
 module.exports = () => ( {
 	entry: {
 		controls: resolve( process.cwd(), 'src/assets/js', 'controls.js' ),
+		customizer: resolve( process.cwd(), 'src/assets/js', 'customizer.js' ),
 	},
 	output: {
 		filename: '[name].js',

@@ -1,0 +1,38 @@
+.customize-control-customind-dimension .customind-control-body > ul {
+	display: grid;
+	grid-template-columns: repeat(4,1fr) 20px;
+	grid-gap: 10px;
+
+	.dashicons-admin-links {
+		color: #007cba;
+	}
+
+	li {
+		margin: 0;
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button{
+			-webkit-appearance: none;
+		}
+
+		input[type=number] {
+			-moz-appearance: textfield;
+		}
+
+		&[role="button"] {
+			max-width: 20px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.components-base-control__field,
+		.components-base-control__label {
+			margin-bottom: 0;
+		}
+
+		> .dashicon {
+			font-size: 16px;
+		}
+	}
+}

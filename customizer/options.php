@@ -180,11 +180,11 @@ class CustomindOptions extends BaseOption {
 				'links'    => array(
 					array(
 						'url'  => 'https://themegrill.com/themes',
-						'text' => esc_html__( 'Visit ThemeGrill', 'colormag' ),
+						'text' => esc_html__( 'Visit ThemeGrill', 'customind' ),
 					),
 					array(
 						'url'  => 'https://themegrill.com/themes',
-						'text' => esc_html__( 'Visit ThemeGrill', 'colormag' ),
+						'text' => esc_html__( 'Visit ThemeGrill', 'customind' ),
 					),
 				),
 			),
@@ -388,6 +388,124 @@ class CustomindOptions extends BaseOption {
 				),
 			),
 			array(
+				'name'     => 'customind_group_2',
+				'label'    => 'Group 2',
+				'default'  => '',
+				'type'     => 'control',
+				'control'  => 'customind-group',
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
+			array(
+				'name'     => 'customind_color_sub_control_2',
+				'label'    => esc_html__( 'Color', 'customind' ),
+				'default'  => '#289dcc',
+				'type'     => 'sub-control',
+				'control'  => 'customind-color',
+				'parent'   => 'customind_group_2',
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
+			array(
+				'name'       => 'customind_responsive_dimensions_sub',
+				'type'       => 'sub-control',
+				'default'    => array(
+					'desktop' => array(
+						'top'    => '5',
+						'right'  => '10',
+						'bottom' => '20',
+						'left'   => '25',
+						'unit'   => 'px',
+					),
+				),
+				'control'    => 'customind-dimensions',
+				'label'      => esc_html__( 'Dimensions', 'customind' ),
+				'section'    => 'customind_section',
+				'priority'   => 30,
+				'units'      => array( 'px', 'rem', '' ),
+				'parent'     => 'customind_group_2',
+				'responsive' => true,
+			),
+			array(
+				'name'     => 'customind_builder_control_2',
+				'type'     => 'control',
+				'default'  => array(
+					'top'    => array(
+						'top_left'   => array( 'logo' ),
+						'top_center' => array(),
+						'top_right'  => array(),
+					),
+					'main'   => array(
+						'main_left'   => array(),
+						'main_center' => array(),
+						'main_right'  => array(),
+					),
+					'bottom' => array(
+						'bottom_left'   => array(),
+						'bottom_center' => array(),
+						'bottom_right'  => array(),
+					),
+				),
+				'control'  => 'customind-builder',
+				'label'    => esc_html__( 'Builder', 'customind' ),
+				'section'  => 'customind_header_builder_2',
+				'priority' => 30,
+				'choices'  => array(
+					'logo'         => array(
+						'name'    => esc_html__( 'Logo', 'customind' ),
+						'section' => 'title_tagline',
+						'icon'    => 'admin-users',
+					),
+					'navigation'   => array(
+						'name'    => esc_html__( 'Primary Navigation', 'customind' ),
+						'section' => 'customind_primary_navigation',
+						'icon'    => 'menu',
+					),
+					'navigation-2' => array(
+						'name'    => esc_html__( 'Secondary Navigation', 'customind' ),
+						'section' => 'customind_secondary_navigation',
+						'icon'    => 'menu',
+					),
+					'search'       => array(
+						'name'    => esc_html__( 'Search', 'customind' ),
+						'section' => 'customind_header_search',
+						'icon'    => 'search',
+					),
+					'button'       => array(
+						'name'    => esc_html__( 'Button', 'customind' ),
+						'section' => 'customind_header_button',
+						'icon'    => 'admin-links',
+					),
+					'social'       => array(
+						'name'    => esc_html__( 'Social', 'customind' ),
+						'section' => 'customind_header_social',
+						'icon'    => 'share',
+					),
+					'html'         => array(
+						'name'    => esc_html__( 'HTML', 'customind' ),
+						'section' => 'customind_header_html',
+						'icon'    => 'html',
+					),
+				),
+				'areas'    => array(
+					'top'    => array(
+						'top_left'   => 'Top Left',
+						'top_center' => 'Top Center',
+						'top_right'  => 'Top Right',
+					),
+					'main'   => array(
+						'main_left'   => 'Main Left',
+						'main_center' => 'Main center',
+						'main_right'  => 'Main Right',
+					),
+					'bottom' => array(
+						'bottom_left'   => 'Bottom Left',
+						'bottom_center' => 'Bottom Center',
+						'bottom_right'  => 'Bottom Right',
+					),
+				),
+			),
+			array(
 				'name'     => 'customind_builder_control',
 				'type'     => 'control',
 				'default'  => array(
@@ -459,6 +577,39 @@ class CustomindOptions extends BaseOption {
 					),
 				),
 			),
+			array(
+				'name'     => 'customind_group',
+				'label'    => 'Group',
+				'default'  => '',
+				'type'     => 'control',
+				'control'  => 'customind-group',
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
+			
+			array(
+				'name'     => 'customind_color_sub_control',
+				'label'    => 'Color',
+				'default'  => '#b1b6b6',
+				'type'     => 'sub-control',
+				'control'  => 'customind-color',
+				'parent'   => 'customind_group',
+				'tab'      => 'Normal',
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
+			
+			array(
+				'name'     => 'customind_footer_small_menu_text_hover_color',
+				'label'    => esc_html__( 'Color', 'customind' ),
+				'default'  => '#289dcc',
+				'type'     => 'sub-control',
+				'control'  => 'customind-color',
+				'parent'   => 'customind_group',
+				'tab'      => 'Hover',
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
 		);
 		return array_merge( $options, $configs );
 	}
@@ -486,10 +637,23 @@ class CustomindPanels extends BaseOption {
 				'priority' => 10,
 			),
 			array(
+				'name'     => 'customind_footer',
+				'type'     => 'customind-builder-panel',
+				'title'    => esc_html__( 'Builder 2', 'customind' ),
+				'priority' => 10,
+			),
+			array(
 				'name'     => 'customind_header_builder',
 				'type'     => 'customind-builder-section',
 				'panel'    => 'customind_header',
 				'title'    => esc_html__( 'Builder', 'customind' ),
+				'priority' => 10,
+			),
+			array(
+				'name'     => 'customind_header_builder_2',
+				'type'     => 'customind-builder-section',
+				'panel'    => 'customind_footer',
+				'title'    => esc_html__( 'Builder 2', 'customind' ),
 				'priority' => 10,
 			),
 			array(

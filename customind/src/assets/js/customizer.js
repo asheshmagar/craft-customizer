@@ -1,9 +1,12 @@
 import $ from 'jquery';
 import _ from 'lodash';
 
-( () => {
-	const api = wp.customize;
+const api = wp.customize;
 
+/**
+ * Extend sections and panels.
+ */
+{
 	api.bind( 'pane-contents-reflowed', () => {
 		const panels = [],
 			sections = [];
@@ -192,7 +195,10 @@ import _ from 'lodash';
 			return 0 !== activeCount;
 		},
 	} );
+}
 
+// Initialize builder and its panel and section.
+{
 	api.bind( 'ready', () => {
 		const builderPanelSection = {};
 
@@ -230,7 +236,7 @@ import _ from 'lodash';
 
 					selectors.push( `#sub-accordion-section-${ section.id }` );
 					headContainer.addClass( 'customind-hidden-section-navigator' );
-					contentContainer.find( '.section-meta' ).hide();
+					contentContainer.find( '.section-meta' ).addClass( 'hidden' ).hide();
 
 					panel.expanded.bind( ( isExpanded ) => {
 						if ( ! section.controls()?.length ) return;
@@ -243,7 +249,7 @@ import _ from 'lodash';
 						} );
 
 						if ( isExpanded ) {
-							$( `#sub-accordion-panel-${ panelId } li.control-section` ).hide();
+							$( `#sub-accordion-panel-${ panelId } li.control-section` ).addClass( 'customind-hidden-section-navigator' ).hide();
 							$( 'body' ).addClass( newBodyClass );
 						} else {
 							$( 'body' ).removeClass( newBodyClass );
@@ -268,4 +274,12 @@ import _ from 'lodash';
 			}
 		}
 	} );
-} )();
+}
+
+{
+	api.bind( 'ready', () => {
+		api.state.create( 'customindTab' );
+		api.state( 'customindTab' ).set( 'general' );
+	} );
+}
+

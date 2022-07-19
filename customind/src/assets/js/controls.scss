@@ -6,6 +6,21 @@
 
 .customind-device-selector {
 	display: inline-flex;
+
+	.dashicon {
+		font-size: 16px;
+	}
+
+	.components-button {
+		height: 30px;
+		padding-left: 0;
+		padding-right: 0;
+		min-width: 30px;
+
+		&.active {
+			color: #007cba;
+		}
+	}
 }
 
 .customind-select-dropdown {
@@ -201,7 +216,7 @@
 }
 
 .rc-select-item {
-	font-size: 16px;
+	font-size: 13px;
 	line-height: 1.5;
 	padding: 4px 18px 4px 16px;
 }

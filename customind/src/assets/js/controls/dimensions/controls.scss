@@ -1,8 +1,4 @@
 .customize-control-customind-dimension .customind-control-body > ul {
-	display: grid;
-	grid-template-columns: repeat(4,1fr) 20px;
-	grid-gap: 10px;
-
 	.dashicons-admin-links {
 		color: #007cba;
 	}
@@ -33,6 +29,44 @@
 
 		> .dashicon {
 			font-size: 16px;
+		}
+	}
+}
+
+.customize-control-customind-dimension .customind-control-body > ul {
+	display: flex;
+
+	.dashicon {
+		font-size: 13px;
+		vertical-align: middle;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	li:not(:last-child) {
+		margin-right: 5px;
+	}
+
+	li:last-child  {
+		display: flex;
+		margin-left: 5px;
+		align-items: flex-end;
+
+		.components-button {
+			height: 30px;
+			width: 25px;
+			padding: 0;
+			box-shadow: none;
+			justify-content: center;
+			align-items: center;
+
+			&:not(.is-primary) {
+				background-color: #fff;
+			}
+		}
+		.customind-dimension-units {
+			border-left: 1px solid #eee;
 		}
 	}
 }

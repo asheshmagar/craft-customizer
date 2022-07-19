@@ -21,8 +21,8 @@ class DimensionsControl extends BaseControl {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['choices'] = $this->choices;
+		$this->json['choices']    = $this->choices;
 		$this->json['responsive'] = $this->responsive;
-		$this->json['units'] = $this->units;
+		$this->json['units']      = $this->units;
 	}
 }

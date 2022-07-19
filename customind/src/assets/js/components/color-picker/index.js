@@ -6,6 +6,7 @@ const CustomindColorPicker = ( props ) => {
 	const {
 		value = '',
 		onChange = () => {},
+		type = 'customind-color',
 	} = props;
 	const [ isOpen, setIsOpen ] = useState( false );
 
@@ -16,12 +17,28 @@ const CustomindColorPicker = ( props ) => {
 				<span>Select color</span>
 			</Button>
 			{ isOpen && (
-				<Popover
-					className="customind-color"
-					position="bottom center"
-					onClose={ () => setIsOpen( false ) }
-					onFocusOutside={ () => setIsOpen( false ) }
-				>
+				'customind-color' === type ? (
+					<Popover
+						className="customind-color"
+						position="bottom center"
+						onClose={ () => setIsOpen( false ) }
+						onFocusOutside={ () => setIsOpen( false ) }
+					>
+						<ColorPicker
+							color={ value }
+							onChangeComplete={ val => {
+								const { hex, rgb } = val;
+								let newColor = hex;
+								if ( rgb.a !== 1 ) {
+									newColor = `rgba(${ rgb.r },${ rgb.g },${ rgb.b },${ rgb.a })`;
+								}
+								onChange( newColor );
+							} }
+							enableAlpha
+							copyFormat={ [ 'hex' ] }
+						/>
+					</Popover>
+				) : (
 					<ColorPicker
 						color={ value }
 						onChangeComplete={ val => {
@@ -35,7 +52,7 @@ const CustomindColorPicker = ( props ) => {
 						enableAlpha
 						copyFormat={ [ 'hex' ] }
 					/>
-				</Popover>
+				)
 			) }
 		</div>
 	);

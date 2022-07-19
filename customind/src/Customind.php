@@ -337,24 +337,22 @@ class Customind {
 		// For adding settings.
 		$sanitize_callback = isset( $config['sanitize_callback'] ) ? $config['sanitize_callback'] : Control::get_sanitize_callback( $config['control'] );
 		$transport         = isset( $config['transport'] ) ? $config['transport'] : 'refresh';
-		$customize_config  = array(
-			'name'              => $sub_control_name,
-			'datastore_type'    => apply_filters( 'customind_customize_datastore_type', 'theme_mod' ),
-			'control'           => 'customind-hidden',
-			'section'           => $config['section'],
-			'default'           => $config['default'],
-			'transport'         => $transport,
-			'sanitize_callback' => $sanitize_callback,
+		$customize_config  = wp_parse_args(
+			array(
+				'name'              => $sub_control_name,
+				'datastore_type'    => apply_filters( 'customind_customize_datastore_type', 'theme_mod' ),
+				'control'           => 'customind-hidden',
+				'section'           => $config['section'],
+				'default'           => $config['default'],
+				'transport'         => $transport,
+				'sanitize_callback' => $sanitize_callback,
+			),
+			$config
 		);
 
 		$wp_customize->add_setting(
 			$customize_config['name'],
-			array(
-				'default'           => $customize_config['default'],
-				'type'              => $customize_config['datastore_type'],
-				'transport'         => $customize_config['transport'],
-				'sanitize_callback' => $customize_config['sanitize_callback'],
-			)
+			$customize_config
 		);
 
 		$control_type = Control::get_control_instance( $customize_config['control'] );

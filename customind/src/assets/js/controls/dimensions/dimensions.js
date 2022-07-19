@@ -1,7 +1,7 @@
 import { memo, useState } from '@wordpress/element';
 import { useDeviceSelector } from '../hooks';
 import { Tooltip } from '../../components';
-import { TextControl, Dashicon } from '@wordpress/components';
+import { TextControl, Dropdown, Button, ButtonGroup } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const Dimensions = ( props ) => {
@@ -51,13 +51,6 @@ const Dimensions = ( props ) => {
 				</div>
 			) }
 			<div className="customind-control-body">
-				{ units && (
-					<div className="customind-units">
-						{ units.map( u => (
-							<span key={ u } role="button" tabIndex={ 0 } onKeyDown={ e => e.code === 'Enter' && update( u, 'unit' ) } onClick={ () => update( u, 'unit' ) } className={ u }>{ u }</span>
-						) ) }
-					</div>
-				) }
 				<ul>
 					{ [
 						{ key: 'top', value: __( 'Top' ) },
@@ -67,9 +60,36 @@ const Dimensions = ( props ) => {
 					].map( pos => (
 						<li key={ pos.key }><TextControl type="number" label={ pos.value } onChange={ val => update( val, pos.key ) } value={ responsive ? ( value?.[ device ]?.[ pos.key ] || '' ) : ( value?.[ pos.key ] || '' ) } /></li>
 					) ) }
-					{ /* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */ }
-					<li tabIndex={ 0 } role="button" onKeyDown={ e => e.code === 'Enter' && setSync( ! sync ) } onClick={ () => setSync( ! sync ) }>
-						<Dashicon icon={ sync ? 'admin-links' : 'editor-unlink' } />
+					<li>
+						<Button onClick={ () => setSync( ! sync ) } icon={ sync ? 'admin-links' : 'editor-unlink' } />
+						{ units?.length > 0 && (
+							<Dropdown
+								className="customind-dimension-units"
+								position="bottom center"
+								renderToggle={ ( { isOpen, onToggle } ) => (
+									<Button onClick={ onToggle } aria-expanded={ isOpen }>
+										{ responsive ? ( value?.[ device ]?.unit ?? 'px' ) || '-' : ( value?.unit ?? 'px' ) || '-' }
+									</Button>
+								) }
+								renderContent={ ( { onToggle } ) => (
+									<ButtonGroup>
+										{ units.map( u => (
+											<Button
+												className={ ( responsive ? ( value?.[ device ]?.unit ?? 'px' ) : ( value?.unit ?? 'px' ) ) === u ? 'is-primary' : '' }
+												key={ u }
+												onClick={ ( e ) => {
+													e.stopPropagation();
+													update( u, 'unit' );
+													onToggle();
+												} }
+											>
+												{ '' === u ? '-' : u }
+											</Button>
+										) ) }
+									</ButtonGroup>
+								) }
+							/>
+						) }
 					</li>
 				</ul>
 			</div>

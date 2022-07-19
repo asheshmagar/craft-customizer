@@ -2,6 +2,7 @@ import { memo, useState } from '@wordpress/element';
 import { useDeviceSelector } from '../hooks';
 import { Tooltip } from '../../components';
 import { TextControl, Dashicon } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 const Dimensions = ( props ) => {
 	const [ value, setValue ] = useState( props.control.setting.get() || {} );
@@ -58,8 +59,13 @@ const Dimensions = ( props ) => {
 					</div>
 				) }
 				<ul>
-					{ [ 'top', 'right', 'bottom', 'left' ].map( pos => (
-						<li key={ pos }><TextControl type="number" onChange={ val => update( val, pos ) } value={ responsive ? ( value?.[ device ]?.[ pos ] || '' ) : ( value?.[ pos ] || '' ) } /></li>
+					{ [
+						{ key: 'top', value: __( 'Top' ) },
+						{ key: 'right', value: __( 'Right' ) },
+						{ key: 'bottom', value: __( 'Bottom' ) },
+						{ key: 'left', value: __( 'Left' ) },
+					].map( pos => (
+						<li key={ pos.key }><TextControl type="number" label={ pos.value } onChange={ val => update( val, pos.key ) } value={ responsive ? ( value?.[ device ]?.[ pos.key ] || '' ) : ( value?.[ pos.key ] || '' ) } /></li>
 					) ) }
 					{ /* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */ }
 					<li tabIndex={ 0 } role="button" onKeyDown={ e => e.code === 'Enter' && setSync( ! sync ) } onClick={ () => setSync( ! sync ) }>

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from '@wordpress/element';
+import { useState, useMemo, useEffect, useCallback, createPortal, unmountComponentAtNode } from '@wordpress/element';
 import { Button } from '@wordpress/components';
 
 export const useDeviceSelector = () => {
@@ -25,7 +25,8 @@ export const useDeviceSelector = () => {
 					<Button
 						key={ d }
 						className={ `${ d }${ device === d ? ' active' : '' }` }
-						onClick={ () => {
+						onClick={ ( e ) => {
+							e.stopPropagation();
 							setDevice( d );
 							wp?.customize?.previewedDevice?.set( d );
 						} }
@@ -44,4 +45,31 @@ export const useDeviceSelector = () => {
 		},
 		DeviceSelector,
 	};
+};
+
+export const usePortal = ( element ) => {
+	const [ portal, setPortal ] = useState( {
+		render: () => null,
+		remove: () => null,
+	} );
+
+	const makePortal = useCallback( ( el ) => {
+		const Portal = ( { children } ) => createPortal( children, el );
+		const remove = () => unmountComponentAtNode( el );
+		return {
+			render: Portal,
+			remove,
+		};
+	}, [] );
+
+	useEffect( () => {
+		if ( element ) portal.remove();
+		const newPortal = makePortal( element );
+		setPortal( newPortal );
+		return () => {
+			newPortal.remove( element );
+		};
+	}, [ element ] );
+
+	return portal.render;
 };

@@ -13,3 +13,5 @@ export { default as dimensionsControl } from './dimensions';
 export { default as navigateControl } from './navigate';
 export { default as dropdownCategoriesControl } from './dropdown-categories';
 export { default as builderControl } from './builder';
+export { default as groupControl } from './group';
+export { default as hiddenControl } from './hidden';

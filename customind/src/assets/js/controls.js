@@ -14,6 +14,8 @@ import {
 	navigateControl,
 	dropdownCategoriesControl,
 	builderControl,
+	groupControl,
+	hiddenControl,
 } from './controls/index';
 import './controls.scss';
 
@@ -32,3 +34,5 @@ dimensionsControl();
 navigateControl();
 dropdownCategoriesControl();
 builderControl();
+groupControl();
+hiddenControl();

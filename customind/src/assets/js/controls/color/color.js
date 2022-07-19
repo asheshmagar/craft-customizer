@@ -6,6 +6,7 @@ const Color = ( props ) => {
 	const {
 		label,
 		description,
+		type,
 	} = props.control.params;
 
 	return (
@@ -21,7 +22,7 @@ const Color = ( props ) => {
 				</div>
 			) }
 			<div className="customind-control-body">
-				<CustomindColorPicker value={ value } onChange={ ( color ) => {
+				<CustomindColorPicker type={ type } value={ value } onChange={ ( color ) => {
 					setValue( color );
 					props.control.setting.set( color );
 				} } />

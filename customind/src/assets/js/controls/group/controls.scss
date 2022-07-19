@@ -63,6 +63,13 @@
 	.components-tab-panel__tabs-item {
 		flex: 1;
 		justify-content: center;
+		height: 35px;
+		border: 1px solid #eee;
+
+		&:focus,
+		&:active {
+			box-shadow: none !important;
+		}
 	}
 }
 

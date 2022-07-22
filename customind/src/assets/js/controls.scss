@@ -23,6 +23,28 @@
 	}
 }
 
+.customize-control-customind-hidden {
+	display: none !important;
+}
+
+.customize-control {
+	background: #fff;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 0;
+	padding: 10px;
+	position: relative;
+}
+
+.customize-control-customind-title {
+	border-bottom: 1px solid #ebebeb;
+	margin-top: 15px;
+}
+
+#customize-theme-controls .control-section.open {
+	height: 100%;
+}
+
 .customind-select-dropdown {
 	z-index: 999999 !important;
 }

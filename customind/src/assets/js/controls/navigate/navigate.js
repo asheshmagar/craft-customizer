@@ -14,7 +14,7 @@ const Navigate = ( props ) => {
 	}
 
 	return (
-		<div className="customize-control customize-control-customind-navigate">
+		<div className="customind-control customind-navigate-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

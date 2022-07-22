@@ -72,7 +72,7 @@ const Builder = ( props ) => {
 	}, [ open ] );
 
 	return (
-		<div className="customize-control customize-control-customind-builder">
+		<div className="customind-control customind-builder-control">
 			<Portal>
 				<div data-control={ props.control.id } className={ `customind-builder${ open ? ' open' : '' }` }>
 					<div ref={ builderRef } className="customind-builder-rows-wrap">

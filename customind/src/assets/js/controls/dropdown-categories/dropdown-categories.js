@@ -15,7 +15,7 @@ const DropdownCategories = ( props ) => {
 	) ) || [];
 
 	return (
-		<div className="customize-control customize-control-customind-dropdown-categories">
+		<div className="customind-control customind-dropdown-categories-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

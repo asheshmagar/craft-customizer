@@ -13,7 +13,7 @@ const Slider = ( props ) => {
 		...( inputAttrs || {} ),
 	};
 	return (
-		<div className="customize-control customind-slider-control" >
+		<div className="customind-control customind-slider-control" >
 			{ label && (
 				<div className="customize-control-title-wrap">
 					<span className="customize-control-title">{ label }</span>

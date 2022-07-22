@@ -36,7 +36,7 @@ const Dimensions = ( props ) => {
 	};
 
 	return (
-		<div className="customize-control customize-control-customind-dimension">
+		<div className="customind-control customind-dimensions-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>
@@ -64,7 +64,7 @@ const Dimensions = ( props ) => {
 						<Button onClick={ () => setSync( ! sync ) } icon={ sync ? 'admin-links' : 'editor-unlink' } />
 						{ units?.length > 0 && (
 							<Dropdown
-								className="customind-dimension-units"
+								className="customind-dimensions-units"
 								position="bottom center"
 								renderToggle={ ( { isOpen, onToggle } ) => (
 									<Button onClick={ onToggle } aria-expanded={ isOpen }>

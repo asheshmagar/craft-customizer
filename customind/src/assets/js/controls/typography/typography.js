@@ -114,7 +114,7 @@ const Typography = ( props ) => {
 	}, [ value, device ] );
 
 	return (
-		<div className="customize-control customize-control-customind-typography">
+		<div className="customind-control customind-typography-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

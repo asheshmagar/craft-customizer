@@ -43,7 +43,7 @@ const Background = ( props ) => {
 		{ label: __( 'Fixed' ), value: 'fixed' },
 	];
 	return (
-		<div className="customize-control customize-control-customind-background">
+		<div className="customind-control customind-background-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

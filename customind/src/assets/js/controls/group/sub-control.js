@@ -8,6 +8,7 @@ import Navigate from '../navigate/navigate';
 import RadioImage from '../radio-image/radio-image';
 import Slider from '../slider/slider';
 import Toggle from '../toggle/toggle';
+import Gradient from '../gradient/gradient';
 import _ from 'lodash';
 
 const SubControl = props => {
@@ -35,6 +36,8 @@ const SubControl = props => {
 			return <Slider control={ control } customizer={ customizer } />;
 		case 'customind-toggle':
 			return <Toggle control={ control } customizer={ customizer } />;
+		case 'customind-gradient':
+			return <Gradient control={ control } customizer={ customizer } />;
 		default:
 			return null;
 	}

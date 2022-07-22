@@ -15,3 +15,5 @@ export { default as dropdownCategoriesControl } from './dropdown-categories';
 export { default as builderControl } from './builder';
 export { default as groupControl } from './group';
 export { default as hiddenControl } from './hidden';
+export { default as gradientControl } from './gradient';
+export { default as tabControl } from './tab';

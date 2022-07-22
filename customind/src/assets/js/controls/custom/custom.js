@@ -10,7 +10,7 @@ const Custom = ( props ) => {
 	} = props.control.params;
 
 	return (
-		<div className="customize-control customize-control-customind-custom">
+		<div className="customind-control customind-custom-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

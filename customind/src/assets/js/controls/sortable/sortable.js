@@ -54,7 +54,7 @@ export default memo( ( props ) => {
 	};
 
 	return (
-		<div className="customize-control customize-control-customind-sortable">
+		<div className="customind-control customind-sortable-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

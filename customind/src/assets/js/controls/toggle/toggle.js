@@ -9,7 +9,7 @@ const Toggle = ( props ) => {
 		description,
 	} = props.control.params;
 	return (
-		<div className="customize-control customind-toggle-control">
+		<div className="customind-control customind-toggle-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

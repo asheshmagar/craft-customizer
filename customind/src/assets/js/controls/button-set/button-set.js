@@ -12,7 +12,7 @@ const ButtonSet = ( props ) => {
 	} = props.control.params;
 
 	return (
-		<div className="customind-control customind-editor-control">
+		<div className="customind-control customind-button-set-control">
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>

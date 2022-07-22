@@ -124,6 +124,13 @@ class Customind {
 		'customind-builder'             => array(
 			'callback' => 'Customind\Control\BuilderControl',
 		),
+		'customind-gradient'            => array(
+			'callback' => 'Customind\Control\GradientControl',
+		),
+		'customind-tab'                 => array(
+			'callback'          => 'Customind\Control\TabControl',
+			'sanitize_callback' => 'sanitize_text_field',
+		),
 	);
 
 	public $dependency_array = array();

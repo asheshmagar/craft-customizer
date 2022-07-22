@@ -14,6 +14,24 @@ class CustomindOptions extends BaseOption {
 	public function register_options( $options, $customize ) {
 		$configs = array(
 			array(
+				'name'       => 'customind_tab',
+				'type'       => 'control',
+				'control'    => 'customind-tab',
+				'section'    => 'customind_section',
+				'priority'   => 0,
+				'choices'    => array(
+					'general' => array(
+						'label'  => 'General',
+						'target' => 'customind_general',
+					),
+					'design'  => array(
+						'label'  => 'Design',
+						'target' => 'customind_design',
+					),
+				),
+				'active_tab' => 'general',
+			),
+			array(
 				'name'     => 'customind_title',
 				'type'     => 'control',
 				'control'  => 'customind-title',
@@ -586,7 +604,7 @@ class CustomindOptions extends BaseOption {
 				'section'  => 'customind_section',
 				'priority' => 30,
 			),
-			
+
 			array(
 				'name'     => 'customind_color_sub_control',
 				'label'    => 'Color',
@@ -598,7 +616,7 @@ class CustomindOptions extends BaseOption {
 				'section'  => 'customind_section',
 				'priority' => 30,
 			),
-			
+
 			array(
 				'name'     => 'customind_footer_small_menu_text_hover_color',
 				'label'    => esc_html__( 'Color', 'customind' ),
@@ -607,6 +625,15 @@ class CustomindOptions extends BaseOption {
 				'control'  => 'customind-color',
 				'parent'   => 'customind_group',
 				'tab'      => 'Hover',
+				'section'  => 'customind_section',
+				'priority' => 30,
+			),
+			array(
+				'name'     => 'customind_gradient',
+				'label'    => esc_html__( 'Gradient', 'customind' ),
+				'default'  => 'linear-gradient(90deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%)',
+				'type'     => 'control',
+				'control'  => 'customind-gradient',
 				'section'  => 'customind_section',
 				'priority' => 30,
 			),

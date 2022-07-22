@@ -16,6 +16,8 @@ import {
 	builderControl,
 	groupControl,
 	hiddenControl,
+	gradientControl,
+	tabControl,
 } from './controls/index';
 import './controls.scss';
 
@@ -36,3 +38,5 @@ dropdownCategoriesControl();
 builderControl();
 groupControl();
 hiddenControl();
+gradientControl();
+tabControl();

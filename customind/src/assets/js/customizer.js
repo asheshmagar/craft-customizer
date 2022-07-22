@@ -280,6 +280,39 @@ const api = wp.customize;
 	api.bind( 'ready', () => {
 		api.state.create( 'customindTab' );
 		api.state( 'customindTab' ).set( 'general' );
+
+		const controls = $( '#customize-theme-controls' );
+
+		const focusSection = ( sectionId ) => {
+			const section = api.section( sectionId );
+			if ( section ) {
+				const container = section.contentContainer[ 0 ];
+				container.addClass( 'customind-prevent-transition' );
+				setTimeout( () => {
+					section.focus();
+				}, 10 );
+				setTimeout( () => {
+					container.removeClass( 'customind-prevent-transition' ).removeClass( 'busy' );
+					container.css( 'top', '' );
+				}, 300 );
+			}
+		};
+
+		controls.on( 'click', '.customind-tab', function( e ) {
+			e.preventDefault();
+			const target = $( this ).attr( 'data-target' );
+			api.state( 'customindTab' ).set( $( this ).attr( 'data-tab' ) );
+			if ( target ) {
+				focusSection( target );
+			}
+		} );
+
+		api.state( 'customindTab' ).bind( () => {
+			const tab = api.state( 'customindTab' ).get();
+			$( '.customind-tab' ).removeClass( 'active' ).filter( `.customind-${ tab }-tab` ).addClass( 'active' );
+		} );
+
+		controls.on( 'click', '.customize-section-back', () => api.state( 'customindTab' ).set( 'general' ) );
 	} );
 }
 

@@ -1,5 +1,6 @@
-import { SelectControl, RangeControl } from '@wordpress/components';
+import { RangeControl } from '@wordpress/components';
 import { memo, useCallback } from '@wordpress/element';
+import { UnitPicker } from '../index';
 import './controls.scss';
 
 const CustomindRange = ( props ) => {
@@ -10,10 +11,10 @@ const CustomindRange = ( props ) => {
 		...otherProps
 	} = props;
 
-	const update = useCallback( ( val, type = 'value' ) => {
+	const update = ( val, type = 'value' ) => {
 		const newValue = { ...value, [ type ]: val };
 		onChange( newValue );
-	}, [ value ] );
+	};
 
 	return (
 		<div className="customind-range">
@@ -23,11 +24,13 @@ const CustomindRange = ( props ) => {
 				{ ...otherProps }
 			/>
 			{ 0 < units?.length && (
-				<SelectControl
-					onChange={ val => update( '-' === val ? '' : val, 'unit' ) }
-					options={ units.map( u => ( { label: u, name: u } ) ) }
-					value={ value?.unit || 'px' }
-				/>
+				<>
+					<UnitPicker
+						onChange={ val => update( '-' === val ? '' : val, 'unit' ) }
+						value={ ( value?.unit ?? 'px' ) || '-' }
+						units={ units }
+					/>
+				</>
 			) }
 		</div>
 	);

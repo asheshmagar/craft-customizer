@@ -6,14 +6,21 @@ const Editor = ( props ) => {
 	const [ value, setValue ] = useState( '' );
 
 	const {
-		label,
-		description,
-	} = props.control.params;
+		control: {
+			id,
+			params: {
+				label,
+				description,
+			},
+			setting,
+		},
+	} = props;
 
 	useEffect( () => {
 		setValue( props.control.setting.get() );
+
 		const initialize = () => {
-			wp.editor.initialize( ( props?.id || 'customind_editor' ), {
+			wp.editor.initialize( ( id ?? 'customind_editor' ), {
 				quicktags: true,
 				mediaButtons: true,
 				tinymce: {
@@ -41,17 +48,17 @@ const Editor = ( props ) => {
 				'DOMContentLoaded',
 				initialize
 			);
-			wp.editor.remove( ( props?.id || 'customind_editor' ) );
+			wp.editor.remove( ( id ?? 'customind_editor' ) );
 		};
 	}, [] );
 
 	const update = ( val ) => {
 		setValue( val );
-		props.control.setting.set( val );
+		setting.set( val );
 	};
 
 	return (
-		<div className="customind-control customind-editor-control">
+		<div className="customind-control customind-editor-control" data-control-id={ id }>
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>
@@ -64,7 +71,7 @@ const Editor = ( props ) => {
 			) }
 			<textarea
 				className="wp-editor-area"
-				id={ props?.id || 'customind_editor' }
+				id={ id || 'customind_editor' }
 				value={ value }
 				onChange={ e => {
 					update( e.target.value );

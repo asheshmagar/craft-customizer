@@ -6,12 +6,16 @@ import { Tooltip, CustomindColorPicker } from '../../components';
 import { SelectControl } from '@wordpress/components';
 
 const Background = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() );
-
 	const {
-		label,
-		description,
-	} = props.control.params;
+		control: {
+			setting,
+			params: {
+				label,
+				description,
+			},
+		},
+	} = props;
+	const [ value, setValue ] = useState( setting.get() );
 
 	const repeatOptions = [
 		{ label: __( 'No Repeat' ), value: 'no-repeat' },
@@ -60,13 +64,13 @@ const Background = ( props ) => {
 				<CustomindColorPicker value={ value?.[ 'background-color' ] || '' } onChange={ color => {
 					const newVal = { ...value, 'background-color': color };
 					setValue( newVal );
-					props.control.setting.set( newVal );
+					setting.set( newVal );
 				} } />
 				<MediaUpload
 					onSelect={ imgData => {
 						const newVal = { ...value, 'background-image': imgData.url };
 						setValue( newVal );
-						props.control.setting.set( newVal );
+						setting.set( newVal );
 					} }
 					allowedTypes={ [ 'image' ] }
 					render={ ( { open } ) => (
@@ -90,7 +94,7 @@ const Background = ( props ) => {
 										onClick={ () => {
 											const newVal = { ...value, 'background-image': '' };
 											setValue( newVal );
-											props.control.setting.set( newVal );
+											setting.set( newVal );
 										} }
 										className="button"
 									>
@@ -108,7 +112,7 @@ const Background = ( props ) => {
 							onChange={ val => {
 								const newVal = { ...value, 'background-repeat': val };
 								setValue( newVal );
-								props.control.setting.set( newVal );
+								setting.set( newVal );
 							} }
 							label={ __( 'Background Repeat' ) }
 							options={ repeatOptions }
@@ -118,7 +122,7 @@ const Background = ( props ) => {
 							onChange={ val => {
 								const newVal = { ...value, 'background-repeat': val };
 								setValue( newVal );
-								props.control.setting.set( newVal );
+								setting.set( newVal );
 							} }
 							label={ __( 'Background Position' ) }
 							options={ positionOptions }
@@ -128,7 +132,7 @@ const Background = ( props ) => {
 							onChange={ val => {
 								const newVal = { ...value, 'background-size': val };
 								setValue( newVal );
-								props.control.setting.set( newVal );
+								setting.set( newVal );
 							} }
 							label={ __( 'Background Size' ) }
 							options={ sizeOptions }
@@ -138,7 +142,7 @@ const Background = ( props ) => {
 							onChange={ val => {
 								const newVal = { ...value, 'background-attachment': val };
 								setValue( newVal );
-								props.control.setting.set( newVal );
+								setting.set( newVal );
 							} }
 							label={ __( 'Background Attachment' ) }
 							options={ attachmentOptions }

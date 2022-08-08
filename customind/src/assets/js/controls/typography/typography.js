@@ -1,4 +1,4 @@
-import { memo, useState, useMemo } from '@wordpress/element';
+import { memo, useState, useMemo, useCallback } from '@wordpress/element';
 import { BaseControl, SelectControl } from '@wordpress/components';
 import { useDeviceSelector } from '../hooks';
 import { Tooltip, CustomindRange } from '../../components';
@@ -7,28 +7,32 @@ import Select, { Option } from 'rc-select';
 import { VARIANTS } from '../../constants';
 
 const Typography = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() );
-	const { device, DeviceSelector } = useDeviceSelector();
-
 	const {
-		label,
-		description,
-		// inputAttrs,
-		googleFonts,
-		sizeUnits = [],
-		letterSpacingUnits = [],
-		lineHeightUnits = [],
-	} = props.control.params;
+		control: {
+			setting,
+			params: {
+				label,
+				description,
+				inputAttrs: {
+					fonts = [],
+					units = {},
+					...inputAttrs
+				},
+			},
+		},
+	} = props;
+	const [ value, setValue ] = useState( setting.get() );
+	const { device, DeviceSelector } = useDeviceSelector();
 
 	const update = ( val, type = 'font-family' ) => {
 		const newValue = { ...value, [ type ]: val };
 		setValue( newValue );
-		props.control.setting.set( newValue );
+		setting.set( newValue );
 	};
 
 	const currentFont = useMemo( () => {
 		const family = value?.[ 'font-family' ];
-		return googleFonts.filter( g => g.family === family )?.[ 0 ] || {};
+		return fonts.filter( g => g.family === family )?.[ 0 ] || {};
 	}, [ value ] );
 
 	const inputIcon = () => (
@@ -45,7 +49,6 @@ const Typography = ( props ) => {
 		} else {
 			variant = 400;
 		}
-
 		return variant;
 	};
 
@@ -74,6 +77,12 @@ const Typography = ( props ) => {
 	// 	};
 	// }, [ device, value ] );
 
+	const getInputAttrsProps = useCallback( ( type = 'font-size' ) => {
+		const allUnits = inputAttrs?.[ device ]?.[ type ];
+		if ( ! allUnits ) return {};
+		return { ...allUnits };
+	}, [ device ] );
+
 	const FontSize = useMemo( () => {
 		return () => (
 			<CustomindRange
@@ -82,7 +91,8 @@ const Typography = ( props ) => {
 					const newVal = { ...( value?.[ 'font-size' ] || {} ), [ device ]: { ...( value?.[ 'font-size' ]?.[ device ] || {} ), ...val } };
 					update( newVal, 'font-size' );
 				} }
-				units={ sizeUnits }
+				units={ units?.[ 'font-size' ] }
+				{ ...getInputAttrsProps() }
 			/>
 		);
 	}, [ value, device ] );
@@ -95,7 +105,8 @@ const Typography = ( props ) => {
 					const newVal = { ...( value?.[ 'letter-spacing' ] || {} ), [ device ]: { ...( value?.[ 'letter-spacing' ]?.[ device ] || {} ), ...val } };
 					update( newVal, 'letter-spacing' );
 				} }
-				units={ letterSpacingUnits }
+				units={ units?.[ 'letter-spacing' ] }
+				{ ...getInputAttrsProps( 'letter-spacing' ) }
 			/>
 		);
 	}, [ value, device ] );
@@ -108,7 +119,8 @@ const Typography = ( props ) => {
 					const newVal = { ...( value?.[ 'line-height' ] || {} ), [ device ]: { ...( value?.[ 'line-height' ]?.[ device ] || {} ), ...val } };
 					update( newVal, 'line-height' );
 				} }
-				units={ lineHeightUnits }
+				units={ units?.[ 'line-height' ] }
+				{ ...getInputAttrsProps( 'letter-spacing' ) }
 			/>
 		);
 	}, [ value, device ] );
@@ -133,7 +145,7 @@ const Typography = ( props ) => {
 						<BaseControl.VisualLabel>{ __( 'Font Family' ) }</BaseControl.VisualLabel>
 						<Select value={ value?.[ 'font-family' ] || 'default' } onChange={ val => update( val ) } inputIcon={ inputIcon() } showSearch={ true }>
 							<Option value="default">{ __( 'System Default' ) }</Option>
-							{ ( googleFonts || [] ).map( g => (
+							{ ( fonts || [] ).map( g => (
 								<Option key={ g.id } value={ g.family }>{ g.family }</Option>
 							) ) }
 						</Select>

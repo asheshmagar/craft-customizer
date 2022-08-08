@@ -1,19 +1,26 @@
 import { memo, useState } from '@wordpress/element';
 import { useDeviceSelector } from '../hooks';
-import { Tooltip } from '../../components';
-import { TextControl, Dropdown, Button, ButtonGroup } from '@wordpress/components';
+import { Tooltip, UnitPicker } from '../../components';
+import { TextControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 const Dimensions = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() || {} );
+	const {
+		control: {
+			setting,
+			params: {
+				label,
+				description,
+				inputAttrs: {
+					units,
+					responsive = false,
+				},
+			},
+		},
+	} = props;
+	const [ value, setValue ] = useState( setting.get() || {} );
 	const [ sync, setSync ] = useState( true );
 	const { device, DeviceSelector } = useDeviceSelector();
-	const {
-		label,
-		description,
-		units,
-		responsive = false,
-	} = props.control.params;
 
 	const update = ( val, type ) => {
 		let newVal = { ...value };
@@ -32,7 +39,7 @@ const Dimensions = ( props ) => {
 			}
 		}
 		setValue( newVal );
-		props.control.setting.set( newVal );
+		setting.set( newVal );
 	};
 
 	return (
@@ -58,36 +65,22 @@ const Dimensions = ( props ) => {
 						{ key: 'bottom', value: __( 'Bottom' ) },
 						{ key: 'left', value: __( 'Left' ) },
 					].map( pos => (
-						<li key={ pos.key }><TextControl type="number" label={ pos.value } onChange={ val => update( val, pos.key ) } value={ responsive ? ( value?.[ device ]?.[ pos.key ] || '' ) : ( value?.[ pos.key ] || '' ) } /></li>
+						<li key={ pos.key }>
+							<TextControl
+								type="number"
+								label={ pos.value }
+								onChange={ val => update( val, pos.key ) }
+								value={ responsive ? ( value?.[ device ]?.[ pos.key ] || '' ) : ( value?.[ pos.key ] || '' ) }
+							/>
+						</li>
 					) ) }
 					<li>
 						<Button onClick={ () => setSync( ! sync ) } icon={ sync ? 'admin-links' : 'editor-unlink' } />
 						{ units?.length > 0 && (
-							<Dropdown
-								className="customind-dimensions-units"
-								position="bottom center"
-								renderToggle={ ( { isOpen, onToggle } ) => (
-									<Button onClick={ onToggle } aria-expanded={ isOpen }>
-										{ responsive ? ( value?.[ device ]?.unit ?? 'px' ) || '-' : ( value?.unit ?? 'px' ) || '-' }
-									</Button>
-								) }
-								renderContent={ ( { onToggle } ) => (
-									<ButtonGroup>
-										{ units.map( u => (
-											<Button
-												className={ ( responsive ? ( value?.[ device ]?.unit ?? 'px' ) : ( value?.unit ?? 'px' ) ) === u ? 'is-primary' : '' }
-												key={ u }
-												onClick={ ( e ) => {
-													e.stopPropagation();
-													update( u, 'unit' );
-													onToggle();
-												} }
-											>
-												{ '' === u ? '-' : u }
-											</Button>
-										) ) }
-									</ButtonGroup>
-								) }
+							<UnitPicker
+								units={ units }
+								value={ responsive ? ( value?.[ device ]?.unit ?? 'px' ) || '-' : ( value?.unit ?? 'px' ) || '-' }
+								onChange={ val => update( val, 'unit' ) }
 							/>
 						) }
 					</li>

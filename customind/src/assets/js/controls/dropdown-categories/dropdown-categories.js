@@ -3,12 +3,19 @@ import { SelectControl } from '@wordpress/components';
 import { Tooltip } from '../../components';
 
 const DropdownCategories = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() );
 	const {
-		label,
-		description,
-		dropdown = {},
-	} = props.control.params;
+		control: {
+			setting,
+			params: {
+				label,
+				description,
+				inputAttrs: {
+					dropdown = {},
+				},
+			},
+		},
+	} = props;
+	const [ value, setValue ] = useState( setting.get() );
 
 	const options = Object.entries( dropdown || {} )?.map( ( [ id, name ] ) => (
 		{ label: name, value: id }
@@ -30,7 +37,13 @@ const DropdownCategories = ( props ) => {
 			) }
 			<div className="customind-control-body">
 				{ !! options.length && (
-					<SelectControl value={ options.find( o => o.id === value )?.value || '' } onChange={ val => setValue( val ) } options={ options } />
+					<SelectControl
+						value={ options.find( o => o.id === value )?.value || '' }
+						onChange={ val => {
+							setValue( val );
+							setting.set( val );
+						} }
+						options={ options } />
 				) }
 			</div>
 		</div>

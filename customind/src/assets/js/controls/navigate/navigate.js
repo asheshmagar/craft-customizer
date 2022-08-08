@@ -4,10 +4,16 @@ import { Tooltip } from '../../components';
 
 const Navigate = ( props ) => {
 	const {
-		navigate_info: { target_id: targetId, target_label: targetLabel },
-		label,
-		description,
-	} = props.control.params;
+		control: {
+			params: {
+				label,
+				description,
+				inputAttrs: {
+					navigate_info: { target_id: targetId, target_label: targetLabel },
+				},
+			},
+		},
+	} = props;
 
 	if ( ! targetLabel || ! targetId ) {
 		return null;

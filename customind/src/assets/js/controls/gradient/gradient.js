@@ -3,12 +3,17 @@ import { GradientPicker, ColorIndicator, Button } from '@wordpress/components';
 import { Tooltip } from '../../components';
 
 const Gradient = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() );
-	const [ isOpen, setIsOpen ] = useState( false );
 	const {
-		label,
-		description,
-	} = props.control.params;
+		control: {
+			setting,
+			params: {
+				label,
+				description,
+			},
+		},
+	} = props;
+	const [ value, setValue ] = useState( setting.get() );
+	const [ isOpen, setIsOpen ] = useState( false );
 	const popover = useRef();
 	const trigger = useRef();
 
@@ -49,7 +54,7 @@ const Gradient = ( props ) => {
 					{ isOpen && (
 						<GradientPicker className="customind-gradient-picker" value={ value } onChange={ val => {
 							setValue( val );
-							props.control.setting.set( val );
+							setting.set( val );
 						} } />
 					) }
 				</div>

@@ -5,12 +5,22 @@ import { Button } from '@wordpress/components';
 import { usePortal } from '../hooks';
 
 const Builder = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() || {} );
-	const [ open, setOpen ] = useState( false );
 	const {
-		areas = {},
-		section,
-	} = props.control.params;
+		control: {
+			id,
+			params: {
+				inputAttrs: {
+					areas = {},
+				},
+			},
+			setting,
+			section,
+		},
+		customizer,
+	} = props;
+
+	const [ value, setValue ] = useState( setting.get() || {} );
+	const [ open, setOpen ] = useState( false );
 	const builderRef = useRef();
 	const Portal = usePortal( document.getElementById( 'customize-controls' ) );
 
@@ -19,7 +29,7 @@ const Builder = ( props ) => {
 		newValue[ row ][ area ] = items;
 		if ( ! isEqual( newValue, value ) ) {
 			setValue( newValue );
-			props.control.setting.set( newValue );
+			setting.set( newValue );
 		}
 	};
 
@@ -28,7 +38,7 @@ const Builder = ( props ) => {
 		newValue[ row ][ area ] = ( newValue?.[ row ]?.[ area ] || [] ).filter( v => v !== item );
 		if ( ! isEqual( newValue, value ) ) {
 			setValue( newValue );
-			props.control.setting.set( newValue );
+			setting.set( newValue );
 		}
 	};
 
@@ -52,8 +62,8 @@ const Builder = ( props ) => {
 			if ( ! builderRef.current ) return;
 			const height = builderRef.current?.offsetHeight || '';
 			if ( open ) {
-				props.customizer.previewer.container.css( 'max-height', `calc(100vh - ${ height }px)` );
-				props.customizer.previewer.container.css( {
+				customizer.previewer.container.css( 'max-height', `calc(100vh - ${ height }px)` );
+				customizer.previewer.container.css( {
 					maxHeight: `calc(100vh - ${ height }px)`,
 					marginTop: 0,
 				} );
@@ -72,9 +82,9 @@ const Builder = ( props ) => {
 	}, [ open ] );
 
 	return (
-		<div className="customind-control customind-builder-control">
+		<div className="customind-control customind-builder-control" data-control-id={ id }>
 			<Portal>
-				<div data-control={ props.control.id } className={ `customind-builder${ open ? ' open' : '' }` }>
+				<div className={ `customind-builder${ open ? ' open' : '' }` } data-portal-for={ id }>
 					<div ref={ builderRef } className="customind-builder-rows-wrap">
 						<div className="customind-builder-rows">
 							{ Object.keys( areas ).map( row => (

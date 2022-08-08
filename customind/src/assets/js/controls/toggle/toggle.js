@@ -3,11 +3,16 @@ import { useState, memo } from '@wordpress/element';
 import { Tooltip } from '../../components';
 
 const Toggle = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() );
 	const {
-		label,
-		description,
-	} = props.control.params;
+		control: {
+			setting,
+			params: {
+				label,
+				description,
+			},
+		},
+	} = props;
+	const [ value, setValue ] = useState( setting.get() );
 	return (
 		<div className="customind-control customind-toggle-control">
 			{ label && (
@@ -26,7 +31,7 @@ const Toggle = ( props ) => {
 				checked={ !! value }
 				onChange={ () => {
 					setValue( ! value );
-					props.control.setting.set( ! value );
+					setting.set( ! value );
 				} }
 			/>
 		</div>

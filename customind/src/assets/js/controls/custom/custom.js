@@ -1,16 +1,22 @@
-import { memo } from '@wordpress/element';
-import ReactHtmlParser from 'react-html-parser';
+import { memo, RawHTML } from '@wordpress/element';
 import { Button } from '@wordpress/components';
 
 const Custom = ( props ) => {
 	const {
-		label,
-		info,
-		links,
-	} = props.control.params;
+		control: {
+			id,
+			params: {
+				label,
+				inputAttrs: {
+					info,
+					links,
+				},
+			},
+		},
+	} = props;
 
 	return (
-		<div className="customind-control customind-custom-control">
+		<div className="customind-control customind-custom-control" data-control-id={ id }>
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>
@@ -18,7 +24,7 @@ const Custom = ( props ) => {
 			) }
 			<div className="customind-control-body">
 				{ info && (
-					ReactHtmlParser( info )
+					<RawHTML>{ info }</RawHTML>
 				) }
 				{ links && (
 					<ul className="customind-links">

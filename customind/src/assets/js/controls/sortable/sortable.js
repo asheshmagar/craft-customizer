@@ -4,16 +4,24 @@ import { Button, Icon } from '@wordpress/components';
 import { Sortable } from 'sortablejs';
 
 export default memo( ( props ) => {
+	const {
+		control: {
+			id,
+			params: {
+				label,
+				description,
+				choices,
+				inputAttrs: {
+					unsortable = [],
+				},
+			},
+			setting,
+		},
+	} = props;
+
 	const sortableRef = useRef();
 	const unsortableRef = useRef();
-	const [ value ] = useState( props.control.setting.get() );
-
-	const {
-		label,
-		description,
-		choices,
-		unsortable,
-	} = props.control.params;
+	const [ value ] = useState( setting.get() );
 
 	const update = useCallback( () => {
 		const sortableValue = [];
@@ -33,7 +41,7 @@ export default memo( ( props ) => {
 			}
 		}
 		const newValue = unsortableValue.concat( sortableValue );
-		props.control.setting.set( newValue );
+		setting.set( newValue );
 	}, [ unsortableRef.current, sortableRef.current ] );
 
 	useEffect( () => {
@@ -54,7 +62,7 @@ export default memo( ( props ) => {
 	};
 
 	return (
-		<div className="customind-control customind-sortable-control">
+		<div className="customind-control customind-sortable-control" data-control-id={ id }>
 			{ label && (
 				<div className="customind-control-head">
 					<span className="customize-control-title">{ label }</span>
@@ -65,39 +73,35 @@ export default memo( ( props ) => {
 					) }
 				</div>
 			) }
-			{ 0 < Object.keys( unsortable ).length && (
+			{ 0 < Object.keys( unsortable ?? {} ).length && (
 				<ul className="customind-unsortable" ref={ unsortableRef }>
+					{ /* eslint-disable-next-line no-shadow */ }
 					{ Object.entries( unsortable ).map( ( [ id, name ] ) => {
 						if ( ( value || [] ).some( v => v === id ) ) {
 							return (
 								<li key={ id } data-id={ id } data-visible={ true } className="customind-unsortable-item">
 									<Button onClick={ handleVisibility } iconSize={ 20 } icon="visibility" />
-									<span>
-										{ name }
-									</span>
+									<span>{ name }</span>
 								</li>
 							);
 						}
 						return (
 							<li key={ id } data-id={ id } className="customind-unsortable-item">
 								<Button onClick={ handleVisibility } iconSize={ 20 } icon="visibility" />
-								<span>
-									{ name }
-								</span>
+								<span>{ name }</span>
 							</li>
 						);
 					} ) }
 				</ul>
 			) }
 			<ul className="customind-sortable" ref={ sortableRef }>
+				{ /* eslint-disable-next-line no-shadow */ }
 				{ ( value || [] ).map( id => {
 					if ( choices?.[ id ] ) {
 						return (
 							<li key={ id } data-id={ id } data-visible={ true } className="customind-sortable-item">
 								<Button onClick={ handleVisibility } iconSize={ 20 } icon="visibility" />
-								<span>
-									{ choices[ id ] }
-								</span>
+								<span>{ choices[ id ] }</span>
 								<Icon
 									icon="menu"
 									size={ 20 }
@@ -107,14 +111,13 @@ export default memo( ( props ) => {
 					}
 					return null;
 				} ) }
+				{ /* eslint-disable-next-line no-shadow */ }
 				{ Object.entries( choices || {} ).map( ( [ id, name ] ) => {
 					if ( -1 === ( value || [] ).indexOf( id ) ) {
 						return (
 							<li key={ id } data-id={ id } className="customind-sortable-item invisible">
 								<Button onClick={ handleVisibility } iconSize={ 20 } icon="visibility" />
-								<span>
-									{ name }
-								</span>
+								<span>{ name }</span>
 								<Icon
 									icon="menu"
 									size={ 20 }

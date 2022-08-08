@@ -11,11 +11,13 @@ const BuilderArea = ( props ) => {
 		value = {},
 		update,
 		control: {
+			id,
 			params: {
-				choices,
+				choices = {},
 			},
 		},
 		remove,
+		className,
 	} = props;
 
 	const sortableList = useMemo( () => areaItems.map( v => ( { id: v } ) ), [ areaItems ] );
@@ -27,12 +29,12 @@ const BuilderArea = ( props ) => {
 
 	return (
 		<>
-			<div className={ props.className }>
+			<div className={ className }>
 				<ReactSortable
 					ghostClass="customind-builder-item-placeholder"
 					chosenClass="customind-builder-item-chosen"
 					dragClass="customind-builder-item-dragging"
-					group={ `customind-builder-group-${ props.control.id }` }
+					group={ `customind-builder-group-${ id }` }
 					className={ 'customind-builder-droppable' }
 					tag={ 'div' }
 					list={ sortableList }
@@ -64,7 +66,13 @@ const BuilderArea = ( props ) => {
 				</ReactSortable>
 				<Button icon="plus" className="customind-builder-popover-trigger" onClick={ () => setIsOpen( open => ! open ) } />
 				{ isOpen && (
-					<Popover position="top center" noArrow={ false } className="customind-builder-components-popover" onClose={ () => setIsOpen( false ) } onFocusOutside={ () => setIsOpen( false ) }>
+					<Popover
+						position="top center"
+						noArrow={ false }
+						className="customind-builder-components-popover"
+						onClose={ () => setIsOpen( false ) }
+						onFocusOutside={ () => setIsOpen( false ) }
+					>
 						<div className="customind-builder-components">
 							{ currentAvailableItems?.length > 0 ? (
 								<ButtonGroup className="customind-builder-components-group" >
@@ -82,7 +90,10 @@ const BuilderArea = ( props ) => {
 								</ButtonGroup>
 							) : (
 								<div className="customind-builder-components-group">
-									<div className="customind-builder-component-none" style={ { gridColumn: '1/-1', textAlign: 'center' } }>
+									<div
+										className="customind-builder-component-none"
+										style={ { gridColumn: '1/-1', textAlign: 'center' } }
+									>
 										{ __( 'No components' ) }
 									</div>
 								</div>

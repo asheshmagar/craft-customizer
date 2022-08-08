@@ -2,12 +2,17 @@ import { memo, useState } from '@wordpress/element';
 import { Tooltip, CustomindColorPicker } from '../../components';
 
 const Color = ( props ) => {
-	const [ value, setValue ] = useState( props.control.setting.get() );
 	const {
-		label,
-		description,
-		type,
-	} = props.control.params;
+		control: {
+			setting,
+			params: {
+				label,
+				description,
+				type,
+			},
+		},
+	} = props;
+	const [ value, setValue ] = useState( setting.get() );
 
 	return (
 		<div className="customind-control customind-color-control">
@@ -24,7 +29,7 @@ const Color = ( props ) => {
 			<div className="customind-control-body">
 				<CustomindColorPicker type={ type } value={ value } onChange={ ( color ) => {
 					setValue( color );
-					props.control.setting.set( color );
+					setting.set( color );
 				} } />
 			</div>
 		</div>

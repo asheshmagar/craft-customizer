@@ -9,11 +9,14 @@ const Group = props => {
 	const trigger = useRef();
 
 	const {
+		id,
 		control: {
 			params: {
 				label,
 				description,
-				fields = {},
+				inputAttrs: {
+					fields = {},
+				},
 			},
 		},
 		customizer,
@@ -40,7 +43,7 @@ const Group = props => {
 
 	return (
 		<>
-			<div className="customind-control customind-group-control">
+			<div className="customind-control customind-group-control" data-control-id={ id }>
 				{ label && (
 					<div className="customind-control-head">
 						<span className="customize-control-title">{ label }</span>
@@ -49,7 +52,12 @@ const Group = props => {
 								<span className="customize-control-description">{ description }</span>
 							</Tooltip>
 						) }
-						<Button className={ `customind-group-popover-trigger${ isOpen ? ' active' : '' }` } ref={ trigger } onClick={ () => setIsOpen( open => ! open ) } icon={ isOpen ? 'no' : 'edit' } />
+						<Button
+							className={ `customind-group-popover-trigger${ isOpen ? ' active' : '' }` }
+							ref={ trigger }
+							onClick={ () => setIsOpen( open => ! open ) }
+							icon={ isOpen ? 'no' : 'edit' }
+						/>
 					</div>
 				) }
 			</div>

@@ -1,10 +1,10 @@
 <?php
 
-namespace Customind\Type;
+namespace Customind\Types;
 
 class Control {
 
-	public static $controls;
+	private static $controls;
 
 	public static function add_control( $name, $attributes ) {
 		global $wp_customize;

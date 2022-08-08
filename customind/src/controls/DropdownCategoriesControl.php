@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class DropdownCategoriesControl extends BaseControl {
 
@@ -17,8 +17,8 @@ class DropdownCategoriesControl extends BaseControl {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$categories             = get_categories();
-		$this->json['dropdown'] = array_reduce(
+		$categories                    = get_categories();
+		$this->input_attrs['dropdown'] = array_reduce(
 			$categories,
 			function( $acc, $curr ) {
 				$acc[ $curr->term_id ] = $curr->cat_name;
@@ -26,5 +26,6 @@ class DropdownCategoriesControl extends BaseControl {
 			},
 			array()
 		);
+		$this->json['inputAttrs']      = $this->input_attrs;
 	}
 }

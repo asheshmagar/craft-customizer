@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class ColorControl extends BaseControl {
 

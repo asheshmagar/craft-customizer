@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class DividerControl extends BaseControl {
 
@@ -9,21 +9,4 @@ class DividerControl extends BaseControl {
 	 * @var string
 	 */
 	public $type = 'customind-divider';
-
-	/**
-	 * Placement.
-	 *
-	 * @var string
-	 */
-	public $placement = 'above';
-
-	/**
-	 * Refresh the parameters passed to the JavaScript via JSON.
-	 *
-	 * @return void
-	 */
-	public function to_json() {
-		parent::to_json();
-		$this->json['placement'] = $this->placement;
-	}
 }

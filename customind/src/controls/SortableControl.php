@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class SortableControl extends BaseControl {
 
@@ -10,8 +10,6 @@ class SortableControl extends BaseControl {
 	 */
 	public $type = 'customind-sortable';
 
-	public $unsortable = array();
-
 	/**
 	 * Refresh the parameters passed to the JavaScript via JSON.
 	 *
@@ -19,33 +17,27 @@ class SortableControl extends BaseControl {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$choices                  = $this->choices;
-		$this->json['choices']    = array_reduce(
+		$choices                         = $this->choices;
+		$this->json['choices']           = array_reduce(
 			array_keys( $this->choices ),
 			function( $acc, $curr ) use ( $choices ) {
-				if ( ! in_array( $curr, $this->unsortable, true ) ) {
+				if ( ! in_array( $curr, $this->input_attrs['unsortable'], true ) ) {
 					$acc[ $curr ] = $choices[ $curr ];
 				}
 				return $acc;
 			},
 			array()
 		);
-		$this->json['unsortable'] = array_reduce(
-			$this->unsortable,
+		$this->input_attrs['unsortable'] = array_reduce(
+			$this->input_attrs['unsortable'],
 			function( $acc, $curr ) use ( $choices ) {
-				if ( in_array( $curr, $this->unsortable, true ) ) {
+				if ( in_array( $curr, $this->input_attrs['unsortable'], true ) ) {
 					$acc[ $curr ] = $choices[ $curr ];
 				}
 				return $acc;
 			},
 			array()
 		);
-	}
-
-	private function isAssoc( $array ) {
-		if ( array() === $array ) {
-			return false;
-		}
-		return array_keys( $array ) !== range( 0, count( $array ) - 1 );
+		$this->json['inputAttrs']        = $this->input_attrs;
 	}
 }

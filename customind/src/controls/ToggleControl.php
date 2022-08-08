@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class ToggleControl extends BaseControl {
 

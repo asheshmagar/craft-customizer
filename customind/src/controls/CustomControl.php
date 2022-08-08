@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class CustomControl extends BaseControl {
 
@@ -9,30 +9,4 @@ class CustomControl extends BaseControl {
 	 * @var string
 	 */
 	public $type = 'customind-custom';
-
-	/**
-	 * Info.
-	 *
-	 * @var string
-	 */
-	public $info = '';
-
-	/**
-	 * Links
-	 *
-	 * @var array
-	 */
-	public $links = array();
-
-
-	/**
-	 * Refresh the parameters passed to the JavaScript via JSON.
-	 *
-	 * @return void
-	 */
-	public function to_json() {
-		parent::to_json();
-		$this->json['info']  = $this->info;
-		$this->json['links'] = $this->links;
-	}
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class BuilderControl extends BaseControl {
 
@@ -9,12 +9,4 @@ class BuilderControl extends BaseControl {
 	 * @var string
 	 */
 	public $type = 'customind-builder';
-
-	public $areas = array();
-
-	public function to_json() {
-		parent::to_json();
-		$this->json['areas']   = $this->areas;
-		$this->json['choices'] = $this->choices;
-	}
 }

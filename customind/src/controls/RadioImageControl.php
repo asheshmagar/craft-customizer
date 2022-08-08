@@ -1,5 +1,5 @@
 <?php
-namespace Customind\Control;
+namespace Customind\Controls;
 
 class RadioImageControl extends BaseControl {
 
@@ -9,22 +9,4 @@ class RadioImageControl extends BaseControl {
 	 * @var string
 	 */
 	public $type = 'customind-radio-image';
-
-	/**
-	 * Image col.
-	 *
-	 * @var integer
-	 */
-	public $image_col = 1;
-
-	/**
-	 * Refresh the parameters passed to the JavaScript via JSON.
-	 *
-	 * @return void
-	 */
-	public function to_json() {
-		parent::to_json();
-		$this->json['col']     = $this->image_col;
-		$this->json['choices'] = $this->choices;
-	}
 }

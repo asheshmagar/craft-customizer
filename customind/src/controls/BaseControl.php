@@ -3,7 +3,7 @@
  * Customind base control class.
  */
 
-namespace Customind\Control;
+namespace Customind\Controls;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -27,6 +27,7 @@ class BaseControl extends \WP_Customize_Control {
 		$this->json['label']       = esc_html( $this->label );
 		$this->json['description'] = $this->description;
 		$this->json['inputAttrs']  = $this->input_attrs;
+		$this->json['choices']     = $this->choices;
 	}
 
 	/**

@@ -4,4 +4,8 @@ use Customind\Customind;
 
 require __DIR__ . '/vendor/autoload.php';
 
-Customind::get_instance();
+function customind() {
+	return Customind::get_instance();
+}
+
+customind();

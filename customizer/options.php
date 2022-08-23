@@ -383,16 +383,16 @@ class CustomindOptions extends BaseOption {
 			),
 
 			array(
-				'name'          => 'customind_navigate',
-				'type'          => 'control',
-				'control'       => 'customind-navigate',
-				'label'         => esc_html__( 'Navigate', 'customind' ),
-				'section'       => 'customind_header_builder_section',
-				'navigate_info' => array(
+				'name'        => 'customind_navigate',
+				'type'        => 'control',
+				'control'     => 'customind-navigate',
+				'label'       => esc_html__( 'Navigate', 'customind' ),
+				'section'     => 'customind_header_builder_section',
+				'input_attrs' => array(
 					'target_id'    => 'customind_header_builder_section_hidden',
 					'target_label' => esc_html__( 'Dimensions', 'customind' ),
 				),
-				'priority'      => 30,
+				'priority'    => 30,
 			),
 			array(
 				'name'     => 'customind_dropdown_categories',

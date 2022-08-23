@@ -14,12 +14,12 @@ class CustomindOptions extends BaseOption {
 	public function register_options( $options, $customize ) {
 		$configs = array(
 			array(
-				'name'       => 'customind_tab',
-				'type'       => 'control',
-				'control'    => 'customind-tab',
-				'section'    => 'customind_section',
-				'priority'   => 0,
-				'choices'    => array(
+				'name'        => 'customind_tab',
+				'type'        => 'control',
+				'control'     => 'customind-tab',
+				'section'     => 'customind_section',
+				'priority'    => 0,
+				'choices'     => array(
 					'general' => array(
 						'label'  => 'General',
 						'target' => 'customind_general',
@@ -29,7 +29,9 @@ class CustomindOptions extends BaseOption {
 						'target' => 'customind_design',
 					),
 				),
-				'active_tab' => 'general',
+				'input_attrs' => array(
+					'active' => 'general',
+				),
 			),
 			array(
 				'name'     => 'customind_title',
@@ -123,11 +125,13 @@ class CustomindOptions extends BaseOption {
 					'three' => 'Three',
 					'four'  => 'Four',
 				),
-				'unsortable'  => array(
-					'one',
-					'two',
-					'three',
-					'four',
+				'input_attrs' => array(
+					'unsortable' => array(
+						'one',
+						'two',
+						'three',
+						'four',
+					),
 				),
 			),
 			array(
@@ -149,19 +153,21 @@ class CustomindOptions extends BaseOption {
 					'three' => 'Three',
 					'four'  => 'Four',
 				),
-				'unsortable'  => array(
-					'one',
-					'four',
+				'input_attrs' => array(
+					'unsortable' => array(
+						'one',
+						'four',
+					),
 				),
 			),
 			array(
-				'name'      => 'customind_radio_image',
-				'default'   => 'right_sidebar',
-				'type'      => 'control',
-				'control'   => 'customind-radio-image',
-				'label'     => 'Radio Image',
-				'section'   => 'customind_section',
-				'choices'   => array(
+				'name'        => 'customind_radio_image',
+				'default'     => 'right_sidebar',
+				'type'        => 'control',
+				'control'     => 'customind-radio-image',
+				'label'       => 'Radio Image',
+				'section'     => 'customind_section',
+				'choices'     => array(
 					'right_sidebar'                => array(
 						'label' => 'Right sidebar',
 						'url'   => get_template_directory_uri() . '/customizer/left-sidebar.png',
@@ -183,26 +189,30 @@ class CustomindOptions extends BaseOption {
 						'url'   => get_template_directory_uri() . '/customizer/left-sidebar.png',
 					),
 				),
-				'priority'  => 30,
-				'image_col' => 3,
+				'input_attrs' => array(
+					'image_col' => 3,
+				),
+				'priority'    => 30,
 			),
 			array(
-				'name'     => 'customind_custom',
-				'default'  => '',
-				'type'     => 'control',
-				'control'  => 'customind-custom',
-				'label'    => 'Custom',
-				'section'  => 'customind_section',
-				'priority' => 30,
-				'info'     => '<h2> This is custom info </h2>',
-				'links'    => array(
-					array(
-						'url'  => 'https://themegrill.com/themes',
-						'text' => esc_html__( 'Visit ThemeGrill', 'customind' ),
-					),
-					array(
-						'url'  => 'https://themegrill.com/themes',
-						'text' => esc_html__( 'Visit ThemeGrill', 'customind' ),
+				'name'        => 'customind_custom',
+				'default'     => '',
+				'type'        => 'control',
+				'control'     => 'customind-custom',
+				'label'       => 'Custom',
+				'section'     => 'customind_section',
+				'priority'    => 30,
+				'input_attrs' => array(
+					'info'  => '<h2> This is custom info </h2>',
+					'links' => array(
+						array(
+							'url'  => 'https://themegrill.com/themes',
+							'text' => esc_html__( 'Visit ThemeGrill', 'customind' ),
+						),
+						array(
+							'url'  => 'https://themegrill.com/themes',
+							'text' => esc_html__( 'Visit ThemeGrill', 'customind' ),
+						),
 					),
 				),
 			),
@@ -242,8 +252,8 @@ class CustomindOptions extends BaseOption {
 				'priority'    => 30,
 			),
 			array(
-				'name'                 => 'customind_typography',
-				'default'              => array(
+				'name'        => 'customind_typography',
+				'default'     => array(
 					'font-family'    => 'default',
 					'font-weight'    => 'regular',
 					'subsets'        => array( 'latin' ),
@@ -269,12 +279,12 @@ class CustomindOptions extends BaseOption {
 						'mobile'  => array(),
 					),
 				),
-				'units'                => array(
-					'font-size'       => array( 'px', 'em', 'rem' ),
-					'line-height'     => array( 'px', 'em', 'rem' ),
-					'letter-spacing ' => array( '-', 'px', 'em', 'rem' ),
-				),
-				'input_attrs'          => array(
+				'input_attrs' => array(
+					'units'   => array(
+						'font-size'       => array( 'px', 'em', 'rem' ),
+						'line-height'     => array( 'px', 'em', 'rem' ),
+						'letter-spacing ' => array( '-', 'px', 'em', 'rem' ),
+					),
 					'desktop' => array(
 						'font-size'      => array(
 							'step' => 1,
@@ -327,20 +337,17 @@ class CustomindOptions extends BaseOption {
 						),
 					),
 				),
-				'type'                 => 'control',
-				'control'              => 'customind-typography',
-				'section'              => 'customind_section',
-				'priority'             => 30,
-				'label'                => esc_html__( 'Typography', 'customind' ),
-				'description'          => 'Typography description',
-				'font_size_units'      => array( 'px', 'rem', 'em' ),
-				'letter_spacing_units' => array( 'px', 'rem', 'em' ),
-				'line_height_units'    => array( 'rem', 'em' ),
+				'type'        => 'control',
+				'control'     => 'customind-typography',
+				'section'     => 'customind_section',
+				'priority'    => 30,
+				'label'       => esc_html__( 'Typography', 'customind' ),
+				'description' => 'Typography description',
 			),
 			array(
-				'name'       => 'customind_responsive_dimensions',
-				'type'       => 'control',
-				'default'    => array(
+				'name'        => 'customind_responsive_dimensions',
+				'type'        => 'control',
+				'default'     => array(
 					'desktop' => array(
 						'top'    => '5',
 						'right'  => '10',
@@ -349,12 +356,14 @@ class CustomindOptions extends BaseOption {
 						'unit'   => 'px',
 					),
 				),
-				'control'    => 'customind-dimensions',
-				'label'      => esc_html__( 'Dimensions', 'customind' ),
-				'section'    => 'customind_section',
-				'priority'   => 30,
-				'units'      => array( 'px', 'rem', '' ),
-				'responsive' => true,
+				'control'     => 'customind-dimensions',
+				'label'       => esc_html__( 'Dimensions', 'customind' ),
+				'section'     => 'customind_section',
+				'priority'    => 30,
+				'input_attrs' => array(
+					'units'      => array( 'px', 'rem', '' ),
+					'responsive' => true,
+				),
 			),
 			array(
 				'name'     => 'customind_dimensions',
@@ -384,12 +393,6 @@ class CustomindOptions extends BaseOption {
 					'target_label' => esc_html__( 'Dimensions', 'customind' ),
 				),
 				'priority'      => 30,
-				'context'       => array(
-					array(
-						'setting' => '__current_tab',
-						'value'   => 'general',
-					),
-				),
 			),
 			array(
 				'name'     => 'customind_dropdown_categories',
@@ -415,19 +418,21 @@ class CustomindOptions extends BaseOption {
 				'priority' => 30,
 			),
 			array(
-				'name'     => 'customind_color_sub_control_2',
-				'label'    => esc_html__( 'Color', 'customind' ),
-				'default'  => '#289dcc',
-				'type'     => 'sub-control',
-				'control'  => 'customind-color',
-				'parent'   => 'customind_group_2',
-				'section'  => 'customind_section',
-				'priority' => 30,
+				'name'        => 'customind_color_sub_control_2',
+				'label'       => esc_html__( 'Color', 'customind' ),
+				'default'     => '#289dcc',
+				'type'        => 'sub-control',
+				'control'     => 'customind-color',
+				'section'     => 'customind_section',
+				'priority'    => 30,
+				'input_attrs' => array(
+					'parent' => 'customind_group_2',
+				),
 			),
 			array(
-				'name'       => 'customind_responsive_dimensions_sub',
-				'type'       => 'sub-control',
-				'default'    => array(
+				'name'        => 'customind_responsive_dimensions_sub',
+				'type'        => 'sub-control',
+				'default'     => array(
 					'desktop' => array(
 						'top'    => '5',
 						'right'  => '10',
@@ -436,18 +441,21 @@ class CustomindOptions extends BaseOption {
 						'unit'   => 'px',
 					),
 				),
-				'control'    => 'customind-dimensions',
-				'label'      => esc_html__( 'Dimensions', 'customind' ),
-				'section'    => 'customind_section',
-				'priority'   => 30,
-				'units'      => array( 'px', 'rem', '' ),
-				'parent'     => 'customind_group_2',
-				'responsive' => true,
+				'control'     => 'customind-dimensions',
+				'label'       => esc_html__( 'Dimensions', 'customind' ),
+				'section'     => 'customind_section',
+				'priority'    => 30,
+				'units'       => array( 'px', 'rem', '' ),
+				'parent'      => 'customind_group_2',
+				'responsive'  => true,
+				'input_attrs' => array(
+					'parent' => 'customind_group_2',
+				),
 			),
 			array(
-				'name'     => 'customind_builder_control_2',
-				'type'     => 'control',
-				'default'  => array(
+				'name'        => 'customind_builder_control_2',
+				'type'        => 'control',
+				'default'     => array(
 					'top'    => array(
 						'top_left'   => array( 'logo' ),
 						'top_center' => array(),
@@ -464,11 +472,11 @@ class CustomindOptions extends BaseOption {
 						'bottom_right'  => array(),
 					),
 				),
-				'control'  => 'customind-builder',
-				'label'    => esc_html__( 'Builder', 'customind' ),
-				'section'  => 'customind_header_builder_2',
-				'priority' => 30,
-				'choices'  => array(
+				'control'     => 'customind-builder',
+				'label'       => esc_html__( 'Builder', 'customind' ),
+				'section'     => 'customind_header_builder_2',
+				'priority'    => 30,
+				'choices'     => array(
 					'logo'         => array(
 						'name'    => esc_html__( 'Logo', 'customind' ),
 						'section' => 'title_tagline',
@@ -505,28 +513,30 @@ class CustomindOptions extends BaseOption {
 						'icon'    => 'html',
 					),
 				),
-				'areas'    => array(
-					'top'    => array(
-						'top_left'   => 'Top Left',
-						'top_center' => 'Top Center',
-						'top_right'  => 'Top Right',
-					),
-					'main'   => array(
-						'main_left'   => 'Main Left',
-						'main_center' => 'Main center',
-						'main_right'  => 'Main Right',
-					),
-					'bottom' => array(
-						'bottom_left'   => 'Bottom Left',
-						'bottom_center' => 'Bottom Center',
-						'bottom_right'  => 'Bottom Right',
+				'input_attrs' => array(
+					'areas' => array(
+						'top'    => array(
+							'top_left'   => 'Top Left',
+							'top_center' => 'Top Center',
+							'top_right'  => 'Top Right',
+						),
+						'main'   => array(
+							'main_left'   => 'Main Left',
+							'main_center' => 'Main center',
+							'main_right'  => 'Main Right',
+						),
+						'bottom' => array(
+							'bottom_left'   => 'Bottom Left',
+							'bottom_center' => 'Bottom Center',
+							'bottom_right'  => 'Bottom Right',
+						),
 					),
 				),
 			),
 			array(
-				'name'     => 'customind_builder_control',
-				'type'     => 'control',
-				'default'  => array(
+				'name'        => 'customind_builder_control',
+				'type'        => 'control',
+				'default'     => array(
 					'top'    => array(
 						'top_left'   => array( 'logo' ),
 						'top_center' => array(),
@@ -543,11 +553,11 @@ class CustomindOptions extends BaseOption {
 						'bottom_right'  => array(),
 					),
 				),
-				'control'  => 'customind-builder',
-				'label'    => esc_html__( 'Builder', 'customind' ),
-				'section'  => 'customind_header_builder',
-				'priority' => 30,
-				'choices'  => array(
+				'control'     => 'customind-builder',
+				'label'       => esc_html__( 'Builder', 'customind' ),
+				'section'     => 'customind_header_builder',
+				'priority'    => 30,
+				'choices'     => array(
 					'logo'         => array(
 						'name'    => esc_html__( 'Logo', 'customind' ),
 						'section' => 'title_tagline',
@@ -577,21 +587,23 @@ class CustomindOptions extends BaseOption {
 						'section' => 'customind_header_html',
 					),
 				),
-				'areas'    => array(
-					'top'    => array(
-						'top_left'   => 'Top Left',
-						'top_center' => 'Top Center',
-						'top_right'  => 'Top Right',
-					),
-					'main'   => array(
-						'main_left'   => 'Main Left',
-						'main_center' => 'Main center',
-						'main_right'  => 'Main Right',
-					),
-					'bottom' => array(
-						'bottom_left'   => 'Bottom Left',
-						'bottom_center' => 'Bottom Center',
-						'bottom_right'  => 'Bottom Right',
+				'input_attrs' => array(
+					'areas' => array(
+						'top'    => array(
+							'top_left'   => 'Top Left',
+							'top_center' => 'Top Center',
+							'top_right'  => 'Top Right',
+						),
+						'main'   => array(
+							'main_left'   => 'Main Left',
+							'main_center' => 'Main center',
+							'main_right'  => 'Main Right',
+						),
+						'bottom' => array(
+							'bottom_left'   => 'Bottom Left',
+							'bottom_center' => 'Bottom Center',
+							'bottom_right'  => 'Bottom Right',
+						),
 					),
 				),
 			),
@@ -606,27 +618,31 @@ class CustomindOptions extends BaseOption {
 			),
 
 			array(
-				'name'     => 'customind_color_sub_control',
-				'label'    => 'Color',
-				'default'  => '#b1b6b6',
-				'type'     => 'sub-control',
-				'control'  => 'customind-color',
-				'parent'   => 'customind_group',
-				'tab'      => 'Normal',
-				'section'  => 'customind_section',
-				'priority' => 30,
+				'name'        => 'customind_color_sub_control',
+				'label'       => 'Color',
+				'default'     => '#b1b6b6',
+				'type'        => 'sub-control',
+				'control'     => 'customind-color',
+				'section'     => 'customind_section',
+				'priority'    => 30,
+				'input_attrs' => array(
+					'tab'    => 'Normal',
+					'parent' => 'customind_group',
+				),
 			),
 
 			array(
-				'name'     => 'customind_footer_small_menu_text_hover_color',
-				'label'    => esc_html__( 'Color', 'customind' ),
-				'default'  => '#289dcc',
-				'type'     => 'sub-control',
-				'control'  => 'customind-color',
-				'parent'   => 'customind_group',
-				'tab'      => 'Hover',
-				'section'  => 'customind_section',
-				'priority' => 30,
+				'name'        => 'customind_footer_small_menu_text_hover_color',
+				'label'       => esc_html__( 'Color', 'customind' ),
+				'default'     => '#289dcc',
+				'type'        => 'sub-control',
+				'control'     => 'customind-color',
+				'section'     => 'customind_section',
+				'priority'    => 30,
+				'input_attrs' => array(
+					'tab'    => 'Hover',
+					'parent' => 'customind_group',
+				),
 			),
 			array(
 				'name'     => 'customind_gradient',

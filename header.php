@@ -25,6 +25,16 @@ if ( is_singular() ) {
 	</div>
 </div>
 <hr />
-	<?php print '<pre>';
-		print_r( get_option( 'theme_mods_customind' ) );
-		print '</pre>'; ?>
+<table border="1" style="margin-inline: auto;" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>ID</th>
+		<th>Value</th>
+	</tr>
+	<?php $mods = get_theme_mods(); ?>
+	<?php foreach ( $mods as $key => $value ) : ?>
+		<tr>
+			<td style="padding: 5px;"><?php echo $key; // phpcs:ignore ?></td>
+			<td style="padding: 5px;"><pre><?php var_export( $value ); // phpcs:ignore ?></pre></td>
+		</tr>
+	<?php endforeach; ?>
+</table>

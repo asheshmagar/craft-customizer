@@ -9,13 +9,14 @@ export default memo( ( props ) => {
 				label,
 				description,
 				inputAttrs: {
-					navigate_info: { target_id: targetId, target_label: targetLabel },
+					target_id: targetId,
+					target_label: targetLabel,
 				},
 			},
 		},
 	} = props;
 
-	if ( ! targetLabel || ! targetId ) {
+	if ( ! targetId || ! targetLabel ) {
 		return null;
 	}
 

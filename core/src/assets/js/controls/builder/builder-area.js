@@ -81,7 +81,7 @@ export default memo( ( props ) => {
 											update( [ ...areaItems, item ] );
 											setIsOpen( false );
 										} }>
-											<Dashicon icon={ choices?.[ item ]?.icon || '' } />
+											{ choices?.[ item ]?.icon && <Dashicon icon={ choices[ item ].icon } /> }
 											<span className="customind-builder-component-title">
 												{ choices?.[ item ]?.name || '' }
 											</span>

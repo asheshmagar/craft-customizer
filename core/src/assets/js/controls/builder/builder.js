@@ -45,9 +45,9 @@ export default memo( ( props ) => {
 	const getAreaItems = useCallback( ( row, area ) => value?.[ row ]?.[ area ] || [], [ value ] );
 
 	useEffect( () => {
-		const sec = props.customizer.section( section );
+		const sec = customizer.section( section() );
 		if ( sec?.panel() ) {
-			const panel = props.customizer.panel( sec.panel() );
+			const panel = customizer.panel( sec.panel() );
 			if ( panel ) {
 				panel.expanded.bind( isExpanded => {
 					setOpen( isExpanded );
